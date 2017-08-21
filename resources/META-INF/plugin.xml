@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.sburlyaev.cmd.plugin</id>
   <name>Command Prompt Plugin</name>
-  <version>0.0.5</version>
+  <version>0.0.6</version>
   <vendor email="sburlyaev2016@gmail.com" url="https://github.com/sburlyaev89">Sergey Burlyaev</vendor>
 
   <description><![CDATA[
@@ -10,28 +10,31 @@
   </description>
 
   <change-notes><![CDATA[
-      - The Command Prompt icon was updated.<br>
+      - Added the Command Prompt icon to the Main Tool Bar.<br>
+      - Fixed NPE issue on Android Studio.
     ]]>
   </change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="143"/>
+  <idea-version since-build="162"/>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
        on how to target different products -->
   <depends>com.intellij.modules.lang</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <!--<toolWindow anchor="bottom" id="Terminal-2" factoryClass="ToolWindowFactoryImpl" />-->
+    <!--<toolWindow anchor="bottom" id="Terminal-2" factoryClass="com.sburlyaev.cmd.plugin.ToolWindowFactoryImpl" />-->
+    <!--<errorHandler implementation="com.sburlyaev.cmd.plugin.ErrorReporter"/>-->
   </extensions>
 
   <actions>
-      <action id="MyPlugin.OpenCmd"
-              class="OpenCmd"
+      <action id="MyPlugin.com.sburlyaev.cmd.plugin.OpenCmd"
+              class="com.sburlyaev.cmd.plugin.OpenCmd"
               text="Command Prompt"
               description=""
               icon="/cmd-icon-16.png">
         <add-to-group group-id="NavBarToolBar" anchor="first" />
+        <add-to-group group-id="MainToolBar" anchor="last" />
       </action>
   </actions>
 

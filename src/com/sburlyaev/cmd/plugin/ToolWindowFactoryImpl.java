@@ -1,3 +1,5 @@
+package com.sburlyaev.cmd.plugin;
+
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
@@ -35,7 +37,6 @@ public final class ToolWindowFactoryImpl implements ToolWindowFactory, ActionLis
 
     @Override
     public void init(ToolWindow window) {
-
     }
 
     @Override
