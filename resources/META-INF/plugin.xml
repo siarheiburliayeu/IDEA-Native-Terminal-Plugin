@@ -1,0 +1,38 @@
+<idea-plugin>
+  <id>com.your.company.unique.plugin.id</id>
+  <name>Command Prompt Plugin</name>
+  <version>0.0.5</version>
+  <vendor email="sburlyaev2016@gmail.com" url="https://github.com/sburlyaev89">Sergey Burlyaev</vendor>
+
+  <description><![CDATA[
+      Windows Command Prompt Plugin.<br>
+    ]]>
+  </description>
+
+  <change-notes><![CDATA[
+      - The Command Prompt icon was updated.<br>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="143"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!--<toolWindow anchor="bottom" id="Terminal-2" factoryClass="ToolWindowFactoryImpl" />-->
+  </extensions>
+
+  <actions>
+      <action id="MyPlugin.OpenCmd"
+              class="OpenCmd"
+              text="Command Prompt"
+              description=""
+              icon="/cmd-icon-16.png">
+        <add-to-group group-id="NavBarToolBar" anchor="first" />
+      </action>
+  </actions>
+
+</idea-plugin>
