@@ -1,15 +1,16 @@
 <idea-plugin>
   <id>com.sburlyaev.cmd.plugin</id>
   <name>Command Prompt Plugin</name>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <vendor email="sburlyaev2016@gmail.com" url="https://github.com/sburlyaev89">Sergey Burlyaev</vendor>
 
   <description><![CDATA[
-      Windows Command Prompt Plugin.<br>
+      Command Prompt Plugin.<br>
     ]]>
   </description>
 
   <change-notes><![CDATA[
+      - Added Linux support (gnome-terminal)
       - Added the Command Prompt icon to the Main Tool Bar.<br>
       - Fixed NPE issue on Android Studio.
     ]]>
