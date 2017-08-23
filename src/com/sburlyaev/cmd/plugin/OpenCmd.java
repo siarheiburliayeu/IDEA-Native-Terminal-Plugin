@@ -41,7 +41,7 @@ public class OpenCmd extends AnAction {
 
             case "lin":
                 if ("gnome".equals(gui)) {
-                    command = "gnome-terminal";
+                    command = "gnome-terminal --working-directory=" + projectBaseDir;
                 } else {
                     LOG.warn("The GUI is not supported: " + gui + "(" + osName + " " + osVersion + ")");
                     return;
