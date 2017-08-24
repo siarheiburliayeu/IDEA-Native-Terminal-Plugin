@@ -49,7 +49,7 @@ public class OpenCmd extends AnAction {
                 break;
 
             case "mac":
-                command = "";
+                command = "open -a Terminal.app --new --fresh --args cd " + projectBaseDir;
                 break;
 
             default:
