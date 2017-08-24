@@ -1,16 +1,17 @@
 <idea-plugin>
   <id>com.sburlyaev.cmd.plugin</id>
-  <name>Command Prompt Plugin</name>
-  <version>0.0.7</version>
+  <name>Native Terminal Plugin</name>
+  <version>0.0.8</version>
   <vendor email="sburlyaev2016@gmail.com" url="https://github.com/sburlyaev89">Sergey Burlyaev</vendor>
 
   <description><![CDATA[
-      Command Prompt Plugin.<br>
+      Native Terminal Plugin.<br>
     ]]>
   </description>
 
   <change-notes><![CDATA[
-      - Added Linux support (gnome-terminal)
+      - Added Mac support.<br>
+      - Added Linux support (gnome-terminal).<br>
       - Added the Command Prompt icon to the Main Tool Bar.<br>
       - Fixed NPE issue on Android Studio.
     ]]>
@@ -24,14 +25,12 @@
   <depends>com.intellij.modules.lang</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <!--<toolWindow anchor="bottom" id="Terminal-2" factoryClass="com.sburlyaev.cmd.plugin.ToolWindowFactoryImpl" />-->
-    <!--<errorHandler implementation="com.sburlyaev.cmd.plugin.ErrorReporter"/>-->
   </extensions>
 
   <actions>
-      <action id="MyPlugin.com.sburlyaev.cmd.plugin.OpenCmd"
+      <action id="com.sburlyaev.cmd.plugin.OpenCmd"
               class="com.sburlyaev.cmd.plugin.OpenCmd"
-              text="Command Prompt"
+              text="Terminal"
               description=""
               icon="/cmd-icon-16.png">
         <add-to-group group-id="NavBarToolBar" anchor="first" />
