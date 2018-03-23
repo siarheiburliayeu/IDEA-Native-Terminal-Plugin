@@ -2,7 +2,8 @@
   <id>com.sburlyaev.terminal.plugin</id>
   <name>Native Terminal Plugin</name>
   <version>0.0.8</version>
-  <vendor email="sburlyaev2016@gmail.com" url="https://github.com/sburlyaev89">Sergey Burlyaev</vendor>
+  <vendor email="sburlyaev7@gmail.com"
+          url="https://github.com/sburlyaev">Sergey Burlyaev</vendor>
 
   <description><![CDATA[
       Native Terminal Plugin.<br>
@@ -10,6 +11,7 @@
   </description>
 
   <change-notes><![CDATA[
+      - Updated contact information.<br>
       - Added Mac support.<br>
       - Added Linux support (gnome-terminal).<br>
       - Added the Command Prompt icon to the Main Tool Bar.<br>
