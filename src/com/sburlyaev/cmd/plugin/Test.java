@@ -7,9 +7,9 @@ public class Test {
         String osVersion = System.getProperty("os.version");
         String gui = System.getProperty("sun.desktop");
 
-        System.out.println(osName + " " + osVersion);
-        System.out.println(osName.toLowerCase().substring(0,3));
-        System.out.println(gui);
-
+        String shortName = osName.substring(0, 3).toLowerCase();
+        System.out.println("OS name: " + osName + " (" + shortName + ")");
+        System.out.println("OS version : " + osVersion);
+        System.out.println("GUI: " + gui);
     }
 }
