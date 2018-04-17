@@ -3,7 +3,7 @@
   <name>Native Terminal Plugin</name>
   <version>0.1.1</version>
   <vendor email="sburlyaev7@gmail.com"
-          url="https://github.com/sburlyaev">Sergey Burlyaev</vendor>
+          url="https://github.com/sburlyaev/IDEA-Native-Terminal-Plugin">Sergey Burlyaev</vendor>
 
   <description><![CDATA[
       Native Terminal Plugin.<br>
@@ -11,11 +11,7 @@
   </description>
 
   <change-notes><![CDATA[
-      - Updated contact information.<br>
-      - Added Mac support.<br>
-      - Added Linux support (gnome-terminal).<br>
-      - Added the Command Prompt icon to the Main Tool Bar.<br>
-      - Fixed NPE issue on Android Studio.
+      - Linux: added support for 'awesome window manager'.
     ]]>
   </change-notes>
 
