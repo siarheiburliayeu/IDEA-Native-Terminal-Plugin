@@ -1,6 +1,5 @@
 package com.sburlyaev.cmd.plugin;
 
-import com.intellij.openapi.externalSystem.service.execution.NotSupportedException;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
@@ -32,7 +31,7 @@ public class OpenCmdTest {
 
     @Test
     public void testCreateCommandForLinuxWithGnome() {
-        Environment env = new Environment(OperationSystem.LINUX, "3.14", "gnome");
+        Environment env = new Environment(OperationSystem.LINUX, "4.15.0-10-generic", "gnome");
         String projectBaseDir = "test";
         Command result = testObject.createCommand(env, projectBaseDir);
 
@@ -40,11 +39,14 @@ public class OpenCmdTest {
         assertEquals(expected, result.getCommand());
     }
 
-    @Test(expected = NotSupportedException.class)
-    public void testCreateCommandForLinuxNonGnome() {
-        Environment env = new Environment(OperationSystem.LINUX, "3.14", "xxx");
+    @Test
+    public void testCreateCommandForLinuxNull() {
+        Environment env = new Environment(OperationSystem.LINUX, "4.15.0-10-generic", null);
         String projectBaseDir = "test";
-        testObject.createCommand(env, projectBaseDir);
+        Command result = testObject.createCommand(env, projectBaseDir);
+
+        String expected = MessageFormat.format("gnome-terminal --working-directory={0}", projectBaseDir);
+        assertEquals(expected, result.getCommand());
     }
 
     @Test

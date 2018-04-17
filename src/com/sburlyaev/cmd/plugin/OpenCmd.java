@@ -9,17 +9,17 @@ import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
 
+import java.io.IOException;
+
 public class OpenCmd extends AnAction {
 
     private static final Logger LOG = Logger.getInstance(OpenCmd.class);
-
-    private static final String DE_GNOME = "gnome";
 
     @Override
     public void actionPerformed(AnActionEvent event) {
         try {
             Environment env = getEnvironment();
-            LOG.info("OperationSystem: " + env.getOs() + " " + env.getOsVersion() + " with " + env.getGui());
+            LOG.info(env.toString());
 
             Project project = event.getProject();
             final String projectBaseDir = project != null
@@ -30,8 +30,8 @@ public class OpenCmd extends AnAction {
             LOG.info("Command: " + command.getCommand());
             command.execute();
 
-        } catch (Exception e) {
-            LOG.warn(e);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to execute the command!", e);
         }
     }
 
@@ -47,8 +47,6 @@ public class OpenCmd extends AnAction {
 
     protected Command createCommand(Environment env, String projectBaseDir) {
         OperationSystem os = env.getOs();
-        String osVersion = env.getOsVersion();
-        String gui = env.getGui();
         String command;
 
         switch (os) {
@@ -57,12 +55,8 @@ public class OpenCmd extends AnAction {
                 break;
 
             case LINUX:
-                if (DE_GNOME.equals(gui)) {
-                    command = "gnome-terminal --working-directory=" + projectBaseDir;
-                    break;
-                } else {
-                    throw new NotSupportedException("The GUI is not supported: " + gui + "(" + os + " " + osVersion + ")");
-                }
+                command = "gnome-terminal --working-directory=" + projectBaseDir;
+                break;
 
             case MAC_OS:
                 command = "open -a Terminal.app --new --fresh --args cd " + projectBaseDir;
