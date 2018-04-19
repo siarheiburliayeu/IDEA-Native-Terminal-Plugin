@@ -1,0 +1,40 @@
+package com.sburlyaev.cmd.plugin.model;
+
+public enum Terminal {
+    COMMAND_PROMPT("cmd"),
+    POWER_SHELL("powershell"),
+    GNOME_TERMINAL("gnome-terminal"),
+    MAC_TERMINAL("Terminal"),
+    I_TERM("iTerm"),
+    GENERIC("");
+
+    private final String command;
+
+    Terminal(String name) {
+        this.command = name;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public static Terminal fromString(String command) {
+        if (containsIgnoreCase(command, COMMAND_PROMPT.command)) {
+            return COMMAND_PROMPT;
+        } else if (containsIgnoreCase(command, POWER_SHELL.command)) {
+            return POWER_SHELL;
+        } else if (containsIgnoreCase(command, GNOME_TERMINAL.command)) {
+            return GNOME_TERMINAL;
+        } else if (containsIgnoreCase(command, MAC_TERMINAL.command)) {
+            return MAC_TERMINAL;
+        } else if (containsIgnoreCase(command, I_TERM.command)) {
+            return I_TERM;
+        } else {
+            return GENERIC;
+        }
+    }
+
+    private static boolean containsIgnoreCase(String s1, String s2) {
+        return s1.toLowerCase().contains(s2.toLowerCase());
+    }
+}

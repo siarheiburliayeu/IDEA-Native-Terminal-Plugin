@@ -2,15 +2,25 @@ package com.sburlyaev.cmd.plugin.model;
 
 import com.intellij.openapi.externalSystem.service.execution.NotSupportedException;
 
+import static com.sburlyaev.cmd.plugin.model.Terminal.COMMAND_PROMPT;
+import static com.sburlyaev.cmd.plugin.model.Terminal.GNOME_TERMINAL;
+import static com.sburlyaev.cmd.plugin.model.Terminal.MAC_TERMINAL;
+
 public enum OperationSystem {
-    WINDOWS("win"),
-    LINUX("lin"),
-    MAC_OS("mac");
+    WINDOWS("win", COMMAND_PROMPT),
+    LINUX("lin", GNOME_TERMINAL),
+    MAC_OS("mac", MAC_TERMINAL);
 
     private final String name;
+    private final Terminal defaultTerminal;
 
-    OperationSystem(String name) {
+    OperationSystem(String name, Terminal defaultTerminal) {
         this.name = name;
+        this.defaultTerminal = defaultTerminal;
+    }
+
+    public Terminal getDefaultTerminal() {
+        return defaultTerminal;
     }
 
     public static OperationSystem fromString(String osName) {
