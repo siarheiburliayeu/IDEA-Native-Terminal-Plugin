@@ -27,7 +27,7 @@ public class CommandBuilderTest {
         String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "powershell");
 
-        String expected = MessageFormat.format("powershell -NoExit -Command \"Set-Location ''{0}''\"", projectBaseDir);
+        String expected = MessageFormat.format("cmd /c start powershell -NoExit -Command \"Set-Location ''{0}''\"", projectBaseDir);
         assertEquals(expected, result.getCommand());
     }
 
