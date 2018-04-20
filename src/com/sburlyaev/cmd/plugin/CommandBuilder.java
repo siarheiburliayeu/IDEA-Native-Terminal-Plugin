@@ -7,10 +7,6 @@ import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
 import com.sburlyaev.cmd.plugin.model.Terminal;
 
-import static com.sburlyaev.cmd.plugin.model.Terminal.COMMAND_PROMPT;
-import static com.sburlyaev.cmd.plugin.model.Terminal.GNOME_TERMINAL;
-import static com.sburlyaev.cmd.plugin.model.Terminal.POWER_SHELL;
-
 public class CommandBuilder {
 
     private static final Logger log = Logger.getInstance(CommandBuilder.class);
@@ -27,38 +23,47 @@ public class CommandBuilder {
 
         switch (os) {
             case WINDOWS:
-                if (COMMAND_PROMPT.equals(terminal)) {
-                    builder.append("cmd /c \"start ")
-                            .append(command)
-                            .append(" /K \"cd /d ")
-                            .append(projectBaseDir)
-                            .append("\"");
-                } else if (POWER_SHELL.equals(terminal)) {
-                    builder.append("cmd /c start ")
-                            .append(command)
-                            .append(" -NoExit")
-                            .append(" -Command")
-                            .append(" \"Set-Location '")
-                            .append(projectBaseDir)
-                            .append("'\"");
-                } else {
-                    builder.append("cmd /c \"start ")
-                            .append(command)
-                            .append(" ")
-                            .append(projectBaseDir)
-                            .append("\"");
+
+                switch (terminal) {
+                    case COMMAND_PROMPT:
+                        builder.append("cmd /c \"start ")
+                                .append(command)
+                                .append(" /K \"cd /d ")
+                                .append(projectBaseDir)
+                                .append("\"");
+                        break;
+                    case POWER_SHELL:
+                        builder.append("cmd /c start ")
+                                .append(command)
+                                .append(" -NoExit")
+                                .append(" -Command")
+                                .append(" \"Set-Location '")
+                                .append(projectBaseDir)
+                                .append("'\"");
+                        break;
+                    default:
+                        builder.append("cmd /c \"start ")
+                                .append(command)
+                                .append(" ")
+                                .append(projectBaseDir)
+                                .append("\"");
+                        break;
                 }
                 break;
 
             case LINUX:
-                if (GNOME_TERMINAL.equals(terminal)) {
-                    builder.append(command)
-                            .append(" --working-directory=")
-                            .append(projectBaseDir);
-                } else {
-                    builder.append(command)
-                            .append(" ")
-                            .append(projectBaseDir);
+
+                switch (terminal) {
+                    case GNOME_TERMINAL:
+                        builder.append(command)
+                                .append(" --working-directory=")
+                                .append(projectBaseDir);
+                        break;
+                    default:
+                        builder.append(command)
+                                .append(" ")
+                                .append(projectBaseDir);
+                        break;
                 }
                 break;
 
