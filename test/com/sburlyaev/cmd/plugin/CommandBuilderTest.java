@@ -32,6 +32,17 @@ public class CommandBuilderTest {
     }
 
     @Test
+    public void testCreateCommandForGitBahs() {
+        Environment env = new Environment(OperationSystem.WINDOWS, "10.0", "windows");
+        String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
+        Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\Git\\git-bash.exe");
+
+        System.out.println(result.getCommand());
+        String expected = MessageFormat.format("C:\\Program Files\\Git\\git-bash.exe --cd=\"{0}\"", projectBaseDir);
+        assertEquals(expected, result.getCommand());
+    }
+
+    @Test
     public void testCreateCommandForLinuxWithGnome() {
         Environment env = new Environment(OperationSystem.LINUX, "4.15.0-10-generic", "gnome");
         String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";

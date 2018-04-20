@@ -43,6 +43,24 @@ public class TerminalTest {
     }
 
     @Test
+    public void testFromStringGitBash() {
+        Terminal result = Terminal.fromString("git-bash");
+        assertEquals(Terminal.GIT_BASH, result);
+    }
+
+    @Test
+    public void testFromStringGitBashExe() {
+        Terminal result = Terminal.fromString("git-bash.exe");
+        assertEquals(Terminal.GIT_BASH, result);
+    }
+
+    @Test
+    public void testFromStringGitBashPath() {
+        Terminal result = Terminal.fromString("C:\\Program Files\\Git\\git-bash.exe");
+        assertEquals(Terminal.GIT_BASH, result);
+    }
+
+    @Test
     public void testFromStringGnomeTerminal() {
         Terminal result = Terminal.fromString("gnome-terminal");
         assertEquals(Terminal.GNOME_TERMINAL, result);

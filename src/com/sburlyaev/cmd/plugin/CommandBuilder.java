@@ -41,12 +41,15 @@ public class CommandBuilder {
                                 .append(projectBaseDir)
                                 .append("'\"");
                         break;
-                    default:
-                        builder.append("cmd /c \"start ")
-                                .append(command)
-                                .append(" ")
+                    case GIT_BASH:
+                        builder.append(command)
+                                .append(" --cd=")
+                                .append("\"")
                                 .append(projectBaseDir)
                                 .append("\"");
+                        break;
+                    default:
+                        builder.append(command);
                         break;
                 }
                 break;
@@ -60,9 +63,7 @@ public class CommandBuilder {
                                 .append(projectBaseDir);
                         break;
                     default:
-                        builder.append(command)
-                                .append(" ")
-                                .append(projectBaseDir);
+                        builder.append(command);
                         break;
                 }
                 break;
