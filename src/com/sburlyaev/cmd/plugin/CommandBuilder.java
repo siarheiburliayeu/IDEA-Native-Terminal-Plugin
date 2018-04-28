@@ -1,7 +1,6 @@
 package com.sburlyaev.cmd.plugin;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.externalSystem.service.execution.NotSupportedException;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
@@ -76,7 +75,7 @@ public class CommandBuilder {
                 break;
 
             default:
-                throw new NotSupportedException("The environment is not supported: " + os);
+                throw new RuntimeException("The environment is not supported: " + os);
         }
         return new Command(builder.toString());
     }

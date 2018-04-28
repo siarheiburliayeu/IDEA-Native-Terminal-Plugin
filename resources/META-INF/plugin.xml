@@ -1,13 +1,13 @@
 <idea-plugin>
   <id>com.sburlyaev.terminal.plugin</id>
   <name>Native Terminal Plugin</name>
-  <version>0.1.3</version>
+  <version>0.1.4</version>
   <vendor email="sburlyaev7@gmail.com"
           url="https://github.com/sburlyaev/IDEA-Native-Terminal-Plugin">Sergey Burlyaev</vendor>
 
   <description><![CDATA[
       <h2>Native Terminal Plugin</h2>
-      Adds a terminal icon to the IDE toolbar to open a project directory in a command prompt.
+      adds a terminal icon to the IDE toolbar to open a project directory in a command prompt.
       <br>
       <br>By default, it uses OS native terminal:
       <br>Windows - Command Prompt (cmd)
@@ -20,7 +20,7 @@
   </description>
 
   <change-notes><![CDATA[
-      - Added support for git-bash for Windows.
+      - Fixed ClassDefNotFoundException on some IDEs.
     ]]>
   </change-notes>
 

@@ -1,7 +1,5 @@
 package com.sburlyaev.cmd.plugin.model;
 
-import com.intellij.openapi.externalSystem.service.execution.NotSupportedException;
-
 import static com.sburlyaev.cmd.plugin.model.Terminal.COMMAND_PROMPT;
 import static com.sburlyaev.cmd.plugin.model.Terminal.GNOME_TERMINAL;
 import static com.sburlyaev.cmd.plugin.model.Terminal.MAC_TERMINAL;
@@ -33,7 +31,7 @@ public enum OperationSystem {
         } else if (MAC_OS.name.equals(os)) {
             return MAC_OS;
         } else {
-            throw new NotSupportedException("This Operation System is not supported: " + osName + " (" + os + ")");
+            throw new RuntimeException("This Operation System is not supported: " + osName + " (" + os + ")");
         }
     }
 }

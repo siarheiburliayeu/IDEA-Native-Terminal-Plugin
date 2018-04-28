@@ -1,6 +1,5 @@
 package com.sburlyaev.cmd.plugin.model;
 
-import com.intellij.openapi.externalSystem.service.execution.NotSupportedException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +24,7 @@ public class OperationSystemTest {
         assertEquals(OperationSystem.MAC_OS, result);
     }
 
-    @Test(expected = NotSupportedException.class)
+    @Test(expected = RuntimeException.class)
     public void testFromStringNotSupported() {
         OperationSystem.fromString("NotSupportedOS");
     }
