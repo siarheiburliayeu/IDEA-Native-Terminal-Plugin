@@ -43,6 +43,24 @@ public class TerminalTest {
     }
 
     @Test
+    public void testFromStringConEmuPath() {
+        Terminal result = Terminal.fromString("C:\\Program Files\\ConEmu\\ConEmu64.exe");
+        assertEquals(Terminal.CON_EMU, result);
+    }
+
+    @Test
+    public void testFromStringConEmu() {
+        Terminal result = Terminal.fromString("conemu");
+        assertEquals(Terminal.CON_EMU, result);
+    }
+
+    @Test
+    public void testFromStringConEmu64Exe() {
+        Terminal result = Terminal.fromString("ConEmu64.exe");
+        assertEquals(Terminal.CON_EMU, result);
+    }
+
+    @Test
     public void testFromStringGitBash() {
         Terminal result = Terminal.fromString("git-bash");
         assertEquals(Terminal.GIT_BASH, result);

@@ -32,6 +32,16 @@ public class CommandBuilderTest {
     }
 
     @Test
+    public void testCreateCommandForConEmu() {
+        Environment env = new Environment(OperationSystem.WINDOWS, "10.0", "windows");
+        String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
+        Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\ConEmu\\ConEmu64.exe");
+
+        String expected = MessageFormat.format("C:\\Program Files\\ConEmu\\ConEmu64.exe -Dir \"{0}\"", projectBaseDir);
+        assertEquals(expected, result.getCommand());
+    }
+
+    @Test
     public void testCreateCommandForGitBahs() {
         Environment env = new Environment(OperationSystem.WINDOWS, "10.0", "windows");
         String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";

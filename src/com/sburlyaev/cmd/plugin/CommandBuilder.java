@@ -40,6 +40,14 @@ public class CommandBuilder {
                                 .append(projectBaseDir)
                                 .append("'\"");
                         break;
+                    case CON_EMU:
+                        // todo: -run {bash}
+                        builder.append(command)
+                                .append(" -Dir ")
+                                .append("\"")
+                                .append(projectBaseDir)
+                                .append("\"");
+                        break;
                     case GIT_BASH:
                         builder.append(command)
                                 .append(" --cd=")

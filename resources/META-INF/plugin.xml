@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.sburlyaev.terminal.plugin</id>
   <name>Native Terminal Plugin</name>
-  <version>0.1.4</version>
+  <version>0.1.5</version>
   <vendor email="sburlyaev7@gmail.com"
           url="https://github.com/sburlyaev/IDEA-Native-Terminal-Plugin">Sergey Burlyaev</vendor>
 
@@ -20,7 +20,7 @@
   </description>
 
   <change-notes><![CDATA[
-      - Fixed ClassDefNotFoundException on some IDEs.
+      - Added support for ConEmu terminal.
     ]]>
   </change-notes>
 

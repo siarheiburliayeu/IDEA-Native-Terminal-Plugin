@@ -3,6 +3,7 @@ package com.sburlyaev.cmd.plugin.model;
 public enum Terminal {
     COMMAND_PROMPT("cmd"),
     POWER_SHELL("powershell"),
+    CON_EMU("conemu"),
     GIT_BASH("git-bash"),
     GNOME_TERMINAL("gnome-terminal"),
     MAC_TERMINAL("Terminal"),
@@ -24,6 +25,8 @@ public enum Terminal {
             return COMMAND_PROMPT;
         } else if (containsIgnoreCase(command, POWER_SHELL.command)) {
             return POWER_SHELL;
+        } else if (containsIgnoreCase(command, CON_EMU.command)) {
+            return CON_EMU;
         } else if (containsIgnoreCase(command, GIT_BASH.command)) {
             return GIT_BASH;
         } else if (containsIgnoreCase(command, GNOME_TERMINAL.command)) {
