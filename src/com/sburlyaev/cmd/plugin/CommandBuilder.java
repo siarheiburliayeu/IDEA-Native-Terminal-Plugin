@@ -41,12 +41,18 @@ public class CommandBuilder {
                                 .append("'\"");
                         break;
                     case CON_EMU:
-                        // todo: -run {bash}
-                        builder.append(command)
+                        String conEmuRunCommand = " -run ";
+                        String[] commands = command.split(conEmuRunCommand);
+
+                        builder.append(commands[0])
                                 .append(" -Dir ")
                                 .append("\"")
                                 .append(projectBaseDir)
                                 .append("\"");
+                        if (commands.length == 2) {
+                            builder.append(conEmuRunCommand)
+                                    .append(commands[1]);
+                        }
                         break;
                     case GIT_BASH:
                         builder.append(command)
