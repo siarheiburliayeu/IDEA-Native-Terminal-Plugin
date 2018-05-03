@@ -6,7 +6,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
-import com.sburlyaev.cmd.plugin.model.OperationSystem;
 
 import java.io.IOException;
 
@@ -19,7 +18,7 @@ public class OpenCmd extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
         try {
-            Environment env = getEnvironment();
+            Environment env = Environment.getEnvironment();
             LOG.info(env.toString());
 
             final String projectBaseDir = getProjectBaseDir(event);
@@ -39,15 +38,5 @@ public class OpenCmd extends AnAction {
         return project != null
                 ? project.getBaseDir().getCanonicalPath()
                 : System.getProperty("user.home");
-    }
-
-    private Environment getEnvironment() {
-        String osName = System.getProperty("os.name");
-        String osVersion = System.getProperty("os.version");
-        String gui = System.getProperty("sun.desktop");
-
-        OperationSystem os = OperationSystem.fromString(osName);
-
-        return new Environment(os, osVersion, gui);
     }
 }

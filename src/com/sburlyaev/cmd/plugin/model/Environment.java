@@ -12,6 +12,16 @@ public class Environment {
         this.gui = gui;
     }
 
+    public static Environment getEnvironment() {
+        String osName = System.getProperty("os.name");
+        String osVersion = System.getProperty("os.version");
+        String gui = System.getProperty("sun.desktop");
+
+        OperationSystem os = OperationSystem.fromString(osName);
+
+        return new Environment(os, osVersion, gui);
+    }
+
     public OperationSystem getOs() {
         return os;
     }
