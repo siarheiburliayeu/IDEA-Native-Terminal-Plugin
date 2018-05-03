@@ -7,4 +7,4 @@ Adds a terminal icon to the IDE toolbar to open a project directory in a command
 * `Terminal.app` - for macOS
 
 If you want to use another terminal instead - you can!
-Just specify your favorite one in the FAVORITE_TERMINAL environment variable.
+Just specify your favorite one in the `FAVORITE_TERMINAL` environment variable.
