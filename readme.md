@@ -8,3 +8,5 @@ Adds a terminal icon to the IDE toolbar to open a project directory in a command
 
 If you want to use another terminal instead - you can!
 Just specify your favorite one in the `FAVORITE_TERMINAL` environment variable.
+
+_*PowerShell, ConEmu, GitBash, iTerm are supported._
