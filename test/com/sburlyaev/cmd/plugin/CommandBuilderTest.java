@@ -57,7 +57,6 @@ public class CommandBuilderTest {
         String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\Git\\git-bash.exe");
 
-        System.out.println(result.getCommand());
         String expected = MessageFormat.format("C:\\Program Files\\Git\\git-bash.exe --cd=\"{0}\"", projectBaseDir);
         assertEquals(expected, result.getCommand());
     }
@@ -98,7 +97,7 @@ public class CommandBuilderTest {
         String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
 
-        String expected = MessageFormat.format("open {0} -a Terminal", projectBaseDir);
+        String expected = MessageFormat.format("open ''{0}'' -a Terminal", projectBaseDir);
         assertEquals(expected, result.getCommand());
     }
 
@@ -108,7 +107,7 @@ public class CommandBuilderTest {
         String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "iTerm");
 
-        String expected = MessageFormat.format("open {0} -a iTerm", projectBaseDir);
+        String expected = MessageFormat.format("open ''{0}'' -a iTerm", projectBaseDir);
         assertEquals(expected, result.getCommand());
     }
 }

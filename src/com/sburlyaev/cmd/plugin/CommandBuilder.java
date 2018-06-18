@@ -81,10 +81,10 @@ public class CommandBuilder {
                 }
                 break;
 
-            case MAC_OS:
-                builder.append("open ")
+            case MAC_OS:  // Terminal, iTerm
+                builder.append("open '")
                         .append(projectBaseDir)
-                        .append(" -a ")
+                        .append("' -a ")
                         .append(command);
                 break;
 
