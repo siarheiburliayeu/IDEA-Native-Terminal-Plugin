@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.sburlyaev.terminal.plugin</id>
   <name>Native Terminal Plugin</name>
-  <version>0.1.5</version>
+  <version>0.1.6</version>
   <vendor email="sburlyaev7@gmail.com"
           url="https://github.com/sburlyaev/IDEA-Native-Terminal-Plugin">Sergey Burlyaev</vendor>
 
@@ -15,12 +15,14 @@
       <br>macOS - Terminal.app
       <br>
       <br>If you want to use another terminal instead - you can!
-      Just specify your favorite one in the <bold>FAVORITE_TERMINAL</bold> environment variable.
+      <br>Just specify your favorite one in the <strong>FAVORITE_TERMINAL</strong> environment variable.
+      <br>
+      <br><i>*PowerShell, ConEmu, GitBash, iTerm are supported.</i>
     ]]>
   </description>
 
   <change-notes><![CDATA[
-      - Added support for ConEmu terminal.
+      - macOS: Fix the 'path-with-spaces' issue.
     ]]>
   </change-notes>
 
