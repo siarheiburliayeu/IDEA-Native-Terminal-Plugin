@@ -82,11 +82,7 @@ public class CommandBuilder {
                 break;
 
             case MAC_OS:  // Terminal, iTerm
-                builder.append("open '")
-                        .append(projectBaseDir)
-                        .append("' -a ")
-                        .append(command);
-                break;
+                return new Command("open", projectBaseDir, "-a", command);
 
             default:
                 throw new RuntimeException("The environment is not supported: " + os);
