@@ -25,12 +25,8 @@ public class CommandBuilder {
 
                 switch (terminal) {
                     case COMMAND_PROMPT:
-                        builder.append("cmd /c \"start ")
-                                .append(command)
-                                .append(" /K \"cd /d ")
-                                .append(projectBaseDir)
-                                .append("\"");
-                        break;
+                        return new Command("cmd", "/c", "start", command, "/K", "cd", "/d", projectBaseDir);
+
                     case POWER_SHELL:
                         builder.append("cmd /c start ")
                                 .append(command)
