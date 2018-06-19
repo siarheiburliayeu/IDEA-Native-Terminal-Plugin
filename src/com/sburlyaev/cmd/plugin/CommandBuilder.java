@@ -71,10 +71,7 @@ public class CommandBuilder {
 
                 switch (terminal) {
                     case GNOME_TERMINAL:
-                        builder.append(command)
-                                .append(" --working-directory=")
-                                .append(projectBaseDir);
-                        break;
+                        return new Command(command, "--working-directory", projectBaseDir);
                     default:
                         builder.append(command);
                         break;
