@@ -34,17 +34,13 @@ public class CommandBuilder {
                     case CON_EMU:
                         String conEmuRunCommand = " -run ";
                         String[] commands = command.split(conEmuRunCommand);
+                        Command executableCommand = new Command(commands[0], "-Dir", projectBaseDir);
 
-                        builder.append(commands[0])
-                                .append(" -Dir ")
-                                .append("\"")
-                                .append(projectBaseDir)
-                                .append("\"");
                         if (commands.length == 2) {
-                            builder.append(conEmuRunCommand)
-                                    .append(commands[1]);
+                            executableCommand.add("-run", commands[1]);
                         }
-                        break;
+                        return executableCommand;
+
                     case GIT_BASH:
                         builder.append("\"")
                                 .append(command)
@@ -54,6 +50,7 @@ public class CommandBuilder {
                                 .append(projectBaseDir)
                                 .append("\"");
                         break;
+
                     default:
                         builder.append(command);
                         break;
