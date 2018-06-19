@@ -1,20 +1,36 @@
 package com.sburlyaev.cmd.plugin.model;
 
+import com.intellij.openapi.diagnostic.Logger;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 public class Command {
 
-    private final String command;
+    private static final Logger log = Logger.getInstance(Command.class);
 
-    public Command(String command) {
-        this.command = command;
+    private final String[] commands;
+
+    public Command(String... commands) {
+        this.commands = commands;
     }
 
     public void execute() throws IOException {
-        Runtime.getRuntime().exec(command);
+        ProcessBuilder processBuilder = new ProcessBuilder(commands);
+        log.info(processBuilder.command().toString());
+
+        Process process = processBuilder.start();
+
+        String errorMessage = new BufferedReader(new InputStreamReader(process.getErrorStream()))
+                .lines().collect(Collectors.joining("\n"));
+        if (!errorMessage.isEmpty()) {
+            log.error(errorMessage);
+        }
     }
 
-    public String getCommand() {
-        return command;
+    public String[] getCommands() {
+        return commands;
     }
 }

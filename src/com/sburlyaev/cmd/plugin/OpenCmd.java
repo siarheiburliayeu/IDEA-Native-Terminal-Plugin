@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 
 import java.io.IOException;
@@ -24,9 +23,7 @@ public class OpenCmd extends AnAction {
             final String projectBaseDir = getProjectBaseDir(event);
             final String favoriteTerminal = System.getenv(ENV_FAVORITE_TERMINAL);
 
-            Command command = CommandBuilder.createCommand(env, projectBaseDir, favoriteTerminal);
-            LOG.info("Command: " + command.getCommand());
-            command.execute();
+            CommandBuilder.createCommand(env, projectBaseDir, favoriteTerminal).execute();
 
         } catch (IOException e) {
             throw new RuntimeException("Failed to execute the command!", e);

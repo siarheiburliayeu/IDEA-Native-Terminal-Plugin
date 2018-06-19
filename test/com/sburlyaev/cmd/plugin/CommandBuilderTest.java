@@ -18,7 +18,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
 
         String expected = MessageFormat.format("cmd /c \"start cmd /K \"cd /d {0}\"", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -28,7 +28,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "powershell");
 
         String expected = MessageFormat.format("cmd /c start powershell -NoExit -Command \"Set-Location ''{0}''\"", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\ConEmu\\ConEmu64.exe");
 
         String expected = MessageFormat.format("C:\\Program Files\\ConEmu\\ConEmu64.exe -Dir \"{0}\"", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\ConEmu\\ConEmu64.exe -run {bash}");
 
         String expected = MessageFormat.format("C:\\Program Files\\ConEmu\\ConEmu64.exe -Dir \"{0}\" -run '{'bash'}'", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\Git\\git-bash.exe");
 
         String expected = MessageFormat.format("C:\\Program Files\\Git\\git-bash.exe --cd=\"{0}\"", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
 
         String expected = MessageFormat.format("gnome-terminal --working-directory={0}", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
 
         String expected = MessageFormat.format("gnome-terminal --working-directory={0}", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "dbus-launch gnome-terminal");
 
         String expected = MessageFormat.format("dbus-launch gnome-terminal --working-directory={0}", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -98,7 +98,7 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
 
         String expected = MessageFormat.format("open ''{0}'' -a Terminal", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 
     @Test
@@ -108,6 +108,6 @@ public class CommandBuilderTest {
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "iTerm");
 
         String expected = MessageFormat.format("open ''{0}'' -a iTerm", projectBaseDir);
-        assertEquals(expected, result.getCommand());
+        assertEquals(expected, result.getCommands());
     }
 }
