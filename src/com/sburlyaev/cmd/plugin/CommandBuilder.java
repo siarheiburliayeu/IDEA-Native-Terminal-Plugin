@@ -46,7 +46,9 @@ public class CommandBuilder {
                         }
                         break;
                     case GIT_BASH:
-                        builder.append(command)
+                        builder.append("\"")
+                                .append(command)
+                                .append("\"")
                                 .append(" --cd=")
                                 .append("\"")
                                 .append(projectBaseDir)
