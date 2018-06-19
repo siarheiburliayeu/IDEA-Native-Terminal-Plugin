@@ -28,14 +28,9 @@ public class CommandBuilder {
                         return new Command("cmd", "/c", "start", command, "/K", "cd", "/d", projectBaseDir);
 
                     case POWER_SHELL:
-                        builder.append("cmd /c start ")
-                                .append(command)
-                                .append(" -NoExit")
-                                .append(" -Command")
-                                .append(" \"Set-Location '")
-                                .append(projectBaseDir)
-                                .append("'\"");
-                        break;
+                        return new Command("cmd", "/c", "start", command, "-NoExit", "-Command",
+                                "Set-Location", "'" + projectBaseDir + "'");
+
                     case CON_EMU:
                         String conEmuRunCommand = " -run ";
                         String[] commands = command.split(conEmuRunCommand);
@@ -68,6 +63,7 @@ public class CommandBuilder {
                 switch (terminal) {
                     case GNOME_TERMINAL:
                         return new Command(command, "--working-directory", projectBaseDir);
+
                     default:
                         builder.append(command);
                         break;
