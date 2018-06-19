@@ -22,7 +22,7 @@
   </description>
 
   <change-notes><![CDATA[
-      - macOS: Fix the 'path-with-spaces' issue.
+      - macOS, Linux: Fix the 'path with spaces' issue.
     ]]>
   </change-notes>
 
