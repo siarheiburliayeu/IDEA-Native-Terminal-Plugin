@@ -2,9 +2,7 @@ package com.sburlyaev.cmd.plugin.model;
 
 import com.intellij.openapi.diagnostic.Logger;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,13 +24,7 @@ public class Command {
     }
 
     public void execute() throws IOException {
-        Process process = new ProcessBuilder(commands).start();
-
-        String errorMessage = new BufferedReader(new InputStreamReader(process.getErrorStream()))
-                .lines().collect(Collectors.joining("\n"));
-        if (!errorMessage.isEmpty()) {
-            log.error(errorMessage);
-        }
+        new ProcessBuilder(commands).start();
     }
 
     public List<String> getCommands() {
