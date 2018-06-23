@@ -18,11 +18,9 @@ public class CommandBuilder {
     public static Command createCommand(@NotNull Environment env,
                                         @NotNull String projectDirectory,
                                         @Nullable String favoriteTerminalString) throws FileNotFoundException {
-        if (!new File(projectDirectory).exists()) {
-            throw new FileNotFoundException(projectDirectory);
-        }
-        OperationSystem os = env.getOs();
+        checkProjectDirectory(projectDirectory);
 
+        OperationSystem os = env.getOs();
         String command = favoriteTerminalString == null
                 ? os.getDefaultTerminal().getCommand()
                 : favoriteTerminalString;
@@ -86,5 +84,15 @@ public class CommandBuilder {
                 throw new RuntimeException("The environment is not supported: " + os);
         }
         return new Command(sb.toString());
+    }
+
+    protected static void checkProjectDirectory(@NotNull String projectDirectory) throws FileNotFoundException {
+        File path = new File(projectDirectory);
+        if (!path.exists()) {
+            throw new FileNotFoundException(path.getPath());
+        }
+        if (!path.isDirectory()) {
+            throw new IllegalArgumentException(path.getPath());
+        }
     }
 }

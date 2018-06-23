@@ -111,4 +111,21 @@ public class CommandBuilderTest {
         String expected = MessageFormat.format("open ''{0}'' -a iTerm", projectBaseDir);
         assertEquals(expected, result.getCommands());
     }
+
+    @Test
+    public void testCheckProjectDirectory() throws FileNotFoundException {
+        String dir = System.getProperty("user.dir");
+        CommandBuilder.checkProjectDirectory(dir);
+    }
+
+    @Test(expected = FileNotFoundException.class)
+    public void testCheckProjectDirectoryNotExist() throws FileNotFoundException {
+        CommandBuilder.checkProjectDirectory("/dummyDir");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCheckProjectDirectoryNotDirectory() throws FileNotFoundException {
+        String file = System.getProperty("user.dir") + "/src/com/sburlyaev/cmd/plugin/CommandBuilder.java";
+        CommandBuilder.checkProjectDirectory(file);
+    }
 }
