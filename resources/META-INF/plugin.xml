@@ -8,7 +8,7 @@
 
     <description><![CDATA[
       <h2>Native Terminal Plugin</h2>
-      adds a terminal icon to the IDE toolbar to open a project directory in a command prompt.
+      adds a terminal icon to the IDE toolbar to open a project directory in your favorite terminal.
       <br>
       <br>By default, it uses OS native terminal:
       <br>Windows - Command Prompt (cmd)
