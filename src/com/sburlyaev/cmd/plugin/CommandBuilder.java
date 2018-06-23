@@ -5,36 +5,46 @@ import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
 import com.sburlyaev.cmd.plugin.model.Terminal;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class CommandBuilder {
 
     private static final Logger log = Logger.getInstance(CommandBuilder.class);
 
-    public static Command createCommand(Environment env, String projectBaseDir, String favoriteTerminal) {
+    public static Command createCommand(@NotNull Environment env,
+                                        @NotNull String projectDirectory,
+                                        @Nullable String favoriteTerminalString) throws FileNotFoundException {
+        if (!new File(projectDirectory).exists()) {
+            throw new FileNotFoundException(projectDirectory);
+        }
         OperationSystem os = env.getOs();
-        StringBuilder builder = new StringBuilder();
 
-        String command = favoriteTerminal == null
+        String command = favoriteTerminalString == null
                 ? os.getDefaultTerminal().getCommand()
-                : favoriteTerminal;
+                : favoriteTerminalString;
         Terminal terminal = Terminal.fromString(command);
-        log.info("Favorite terminal is [" + favoriteTerminal + "] and using [" + terminal + "]");
+        log.info("Favorite terminal is [" + favoriteTerminalString + "] and using [" + terminal + "]");
 
+        StringBuilder sb = new StringBuilder();
         switch (os) {
             case WINDOWS:
 
                 switch (terminal) {
                     case COMMAND_PROMPT:
-                        return new Command("cmd", "/c", "start", command, "/K", "cd", "/d", projectBaseDir);
+                        return new Command("cmd", "/c", "start", command, "/K", "cd", "/d", projectDirectory);
 
                     case POWER_SHELL:
                         return new Command("cmd", "/c", "start", command, "-NoExit", "-Command",
-                                "Set-Location", "'" + projectBaseDir + "'");
+                                "Set-Location", "'" + projectDirectory + "'");
 
                     case CON_EMU:
                         String conEmuRunCommand = " -run ";
                         String[] commands = command.split(conEmuRunCommand);
-                        Command executableCommand = new Command(commands[0], "-Dir", projectBaseDir);
+                        Command executableCommand = new Command(commands[0], "-Dir", projectDirectory);
 
                         if (commands.length == 2) {
                             executableCommand.add("-run", commands[1]);
@@ -42,17 +52,17 @@ public class CommandBuilder {
                         return executableCommand;
 
                     case GIT_BASH:
-                        builder.append("\"")
+                        sb.append("\"")
                                 .append(command)
                                 .append("\"")
                                 .append(" --cd=")
                                 .append("\"")
-                                .append(projectBaseDir)
+                                .append(projectDirectory)
                                 .append("\"");
                         break;
 
                     default:
-                        builder.append(command);
+                        sb.append(command);
                         break;
                 }
                 break;
@@ -61,20 +71,20 @@ public class CommandBuilder {
 
                 switch (terminal) {
                     case GNOME_TERMINAL:
-                        return new Command(command, "--working-directory", projectBaseDir);
+                        return new Command(command, "--working-directory", projectDirectory);
 
                     default:
-                        builder.append(command);
+                        sb.append(command);
                         break;
                 }
                 break;
 
             case MAC_OS:  // Terminal, iTerm
-                return new Command("open", projectBaseDir, "-a", command);
+                return new Command("open", projectDirectory, "-a", command);
 
             default:
                 throw new RuntimeException("The environment is not supported: " + os);
         }
-        return new Command(builder.toString());
+        return new Command(sb.toString());
     }
 }

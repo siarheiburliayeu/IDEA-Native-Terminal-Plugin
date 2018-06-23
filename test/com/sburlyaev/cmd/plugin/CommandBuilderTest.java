@@ -5,6 +5,7 @@ import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.text.MessageFormat;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class CommandBuilderTest {
 
     @Test
-    public void testCreateCommandForWindowsDefault() {
+    public void testCreateCommandForWindowsDefault() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.WINDOWS, "10.0", "windows");
         String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
@@ -22,7 +23,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForWindowsPowerShell() {
+    public void testCreateCommandForWindowsPowerShell() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.WINDOWS, "10.0", "windows");
         String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "powershell");
@@ -32,7 +33,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForConEmu() {
+    public void testCreateCommandForConEmu() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.WINDOWS, "10.0", "windows");
         String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\ConEmu\\ConEmu64.exe");
@@ -42,7 +43,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForConEmuWithBash() {
+    public void testCreateCommandForConEmuWithBash() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.WINDOWS, "10.0", "windows");
         String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\ConEmu\\ConEmu64.exe -run {bash}");
@@ -52,7 +53,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForGitBash() {
+    public void testCreateCommandForGitBash() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.WINDOWS, "10.0", "windows");
         String projectBaseDir = "C:\\Users\\user\\IdeaProjects\\IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "C:\\Program Files\\Git\\git-bash.exe");
@@ -62,7 +63,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForLinuxWithGnome() {
+    public void testCreateCommandForLinuxWithGnome() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.LINUX, "4.15.0-10-generic", "gnome");
         String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
@@ -72,7 +73,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForLinuxGuiNull() {
+    public void testCreateCommandForLinuxGuiNull() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.LINUX, "4.15.0-10-generic", null);
         String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
@@ -82,7 +83,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForLinuxDBusLaunch() {
+    public void testCreateCommandForLinuxDBusLaunch() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.LINUX, "4.15.0-10-generic", null);
         String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "dbus-launch gnome-terminal");
@@ -92,7 +93,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForMacOsDefault() {
+    public void testCreateCommandForMacOsDefault() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.MAC_OS, "13.3", "X");
         String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, null);
@@ -102,7 +103,7 @@ public class CommandBuilderTest {
     }
 
     @Test
-    public void testCreateCommandForMacOsITerm() {
+    public void testCreateCommandForMacOsITerm() throws FileNotFoundException {
         Environment env = new Environment(OperationSystem.MAC_OS, "13.3", "X");
         String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
         Command result = CommandBuilder.createCommand(env, projectBaseDir, "iTerm");

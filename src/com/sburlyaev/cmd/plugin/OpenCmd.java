@@ -6,13 +6,17 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
+import com.sburlyaev.cmd.plugin.settings.PluginSettings;
+import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
 
+import java.io.File;
 import java.io.IOException;
 
 public class OpenCmd extends AnAction {
 
     private static final Logger log = Logger.getInstance(OpenCmd.class);
 
+    @Deprecated
     protected static final String ENV_FAVORITE_TERMINAL = "FAVORITE_TERMINAL";
 
     @Override
@@ -21,10 +25,11 @@ public class OpenCmd extends AnAction {
             Environment env = Environment.getEnvironment();
             log.info(env.toString());
 
-            final String projectBaseDir = getProjectBaseDir(event);
-            final String favoriteTerminal = System.getenv(ENV_FAVORITE_TERMINAL);
+            PluginSettingsState settings = PluginSettings.getInstance().getState();
+            final String projectDirectory = getProjectDirectory(event, settings);
+            final String favoriteTerminalString = getFavoriteTerminal(settings);
 
-            Command command = CommandBuilder.createCommand(env, projectBaseDir, favoriteTerminal);
+            Command command = CommandBuilder.createCommand(env, projectDirectory, favoriteTerminalString);
             log.info(command.getCommands().toString());
             command.execute();
 
@@ -33,10 +38,35 @@ public class OpenCmd extends AnAction {
         }
     }
 
-    private String getProjectBaseDir(AnActionEvent event) {
+    private String getFavoriteTerminal(PluginSettingsState settings) {
+        // to be compatible with old versions (prior to v0.2)
+        final String envFavoriteTerminal = System.getenv(ENV_FAVORITE_TERMINAL);
+
+        if (settings != null) {
+            String favoriteTerminalString = settings.getFavoriteTerminal();
+            if (favoriteTerminalString != null && !favoriteTerminalString.isEmpty()) {
+                return favoriteTerminalString;
+            }
+        }
+        return envFavoriteTerminal;
+    }
+
+    private String getProjectDirectory(AnActionEvent event, PluginSettingsState settings) {
         Project project = event.getProject();
-        return project != null
-                ? project.getBaseDir().getCanonicalPath()
-                : System.getProperty("user.home");
+        if (project == null) {
+            return System.getProperty("user.home");
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(project.getBaseDir().getCanonicalPath());
+        if (settings != null) {
+            // Introduce subdirectory support (v0.2)
+            String subDirectory = settings.getSubDirectory();
+            if (subDirectory != null && !subDirectory.isEmpty()) {
+                sb.append(File.separatorChar);
+                sb.append(subDirectory);
+            }
+        }
+        return sb.toString();
     }
 }
