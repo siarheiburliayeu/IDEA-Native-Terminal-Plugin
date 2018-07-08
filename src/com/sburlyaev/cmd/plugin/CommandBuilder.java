@@ -27,10 +27,9 @@ public class CommandBuilder {
         Terminal terminal = Terminal.fromString(command);
         log.info("Favorite terminal is [" + favoriteTerminalString + "] and using [" + terminal + "]");
 
-        StringBuilder sb = new StringBuilder();
         switch (os) {
-            case WINDOWS:
 
+            case WINDOWS:
                 switch (terminal) {
                     case COMMAND_PROMPT:
                         return new Command("cmd", "/c", "start", command, "/K", "cd", "/d", projectDirectory);
@@ -50,40 +49,32 @@ public class CommandBuilder {
                         return executableCommand;
 
                     case GIT_BASH:
-                        sb.append("\"")
-                                .append(command)
-                                .append("\"")
-                                .append(" --cd=")
-                                .append("\"")
-                                .append(projectDirectory)
-                                .append("\"");
-                        break;
+                        return new Command(command, "--cd=" + projectDirectory);
 
                     default:
-                        sb.append(command);
-                        break;
+                        return new Command(command);
                 }
-                break;
 
             case LINUX:
-
                 switch (terminal) {
                     case GNOME_TERMINAL:
                         return new Command(command, "--working-directory", projectDirectory);
 
                     default:
-                        sb.append(command);
-                        break;
+                        return new Command(command);
                 }
-                break;
 
-            case MAC_OS:  // Terminal, iTerm
-                return new Command("open", projectDirectory, "-a", command);
+            case MAC_OS:
+                switch (terminal) {
+                    case MAC_TERMINAL:
+                    case I_TERM:
+                    default:
+                        return new Command("open", projectDirectory, "-a", command);
+                }
 
             default:
                 throw new RuntimeException("The environment is not supported: " + os);
         }
-        return new Command(sb.toString());
     }
 
     protected static void checkProjectDirectory(@NotNull String projectDirectory) throws FileNotFoundException {

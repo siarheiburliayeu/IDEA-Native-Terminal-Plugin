@@ -1,7 +1,5 @@
 package com.sburlyaev.cmd.plugin.model;
 
-import com.intellij.openapi.diagnostic.Logger;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,13 +8,11 @@ import java.util.stream.Collectors;
 
 public class Command {
 
-    private static final Logger log = Logger.getInstance(Command.class);
-
     private final List<String> commands;
 
     public Command(String... commands) {
         this.commands = Arrays.stream(commands)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
     }
 
     public void add(String... commands) {
@@ -24,7 +20,8 @@ public class Command {
     }
 
     public void execute() throws IOException {
-        new ProcessBuilder(commands).start();
+        new ProcessBuilder(commands)
+                .start();
     }
 
     public List<String> getCommands() {

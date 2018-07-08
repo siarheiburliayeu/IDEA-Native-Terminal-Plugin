@@ -1,9 +1,8 @@
 package com.sburlyaev.cmd.plugin;
 
-import java.io.BufferedReader;
+import com.sburlyaev.cmd.plugin.model.Command;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 public class Test {
 
@@ -25,11 +24,17 @@ public class Test {
         String command3 = "-a";
         String command4 = "Terminal";
 
-        ProcessBuilder processBuilder = new ProcessBuilder(command1, command2, command3, command4);
-        System.out.println(processBuilder.command());
-        Process process = processBuilder.start();
+        Command commandX = new Command("C:/Program Files/Git/git-bash.exe",
+//                "--cd=C:/Users/buser/IdeaProjects/Project With Spaces");
+                "--cd=C:/");
+        System.out.println(commandX.getCommands());
+        commandX.execute();
 
-        System.out.println(new BufferedReader(new InputStreamReader(process.getErrorStream()))
-                .lines().collect(Collectors.joining("\n")));
+//        ProcessBuilder processBuilder = new ProcessBuilder(command1, command2, command3, command4);
+//        System.out.println(processBuilder.command());
+//        Process process = processBuilder.start();
+
+//        System.out.println(new BufferedReader(new InputStreamReader(process.getErrorStream()))
+//                .lines().collect(Collectors.joining("\n")));
     }
 }
