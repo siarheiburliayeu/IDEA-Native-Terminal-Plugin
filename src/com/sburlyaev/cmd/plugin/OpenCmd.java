@@ -63,8 +63,14 @@ public class OpenCmd extends AnAction {
             // Introduce subdirectory support (v0.2)
             String subDirectory = settings.getSubDirectory();
             if (subDirectory != null && !subDirectory.isEmpty()) {
-                sb.append(File.separatorChar);
-                sb.append(subDirectory);
+                //Add other directory support -longforus
+                File file = new File(subDirectory);
+                if (file.exists()) {
+                    return subDirectory;
+                } else {
+                    sb.append(File.separatorChar);
+                    sb.append(subDirectory);
+                }
             }
         }
         return sb.toString();
