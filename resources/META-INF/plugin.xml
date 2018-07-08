@@ -16,15 +16,16 @@
       <br>macOS - Terminal.app
       <br>
       <br>If you want to use another terminal instead - you can!
-      <br>Just specify your favorite one in the <strong>IDE Settings</strong>.
-      <br><i>*PowerShell, ConEmu, GitBash, iTerm are supported.</i>
+      <br>Just specify your favorite one in the <strong>IDE Settings / Preferences</strong>.
+      <br><i>*PowerShell, ConEmu, GitBash, iTerm are also supported.</i>
       <br>
       <br>Also, you can specify a <i>subdirectory</i> into your project to be opened instead of the root project directory.
     ]]>
     </description>
 
     <change-notes><![CDATA[
-      - Add FileChooserDialog Support.
+      - Added File Chooser functionality for the plugin settings menu.
+       (Thanks Void Young)
     ]]>
     </change-notes>
 
