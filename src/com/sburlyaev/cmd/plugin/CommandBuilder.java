@@ -52,7 +52,7 @@ public class CommandBuilder {
                         return new Command(command, "--cd=" + projectDirectory);
 
                     default:
-                        return new Command(command);
+                        return new Command("cmd", "/c", "start", command);
                 }
 
             case LINUX:
