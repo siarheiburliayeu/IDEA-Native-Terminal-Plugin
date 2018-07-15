@@ -27,6 +27,8 @@ public class PluginSettingsConfigurable implements Configurable {
     private VirtualFile selectedTerminal;
     private VirtualFile selectedSubDirectory;
 
+    private final String warningMessage = "The selected terminal currently is not supported and may not work properly";
+
     public PluginSettingsConfigurable() {
         terminalChooserDescriptor = new FileChooserDescriptor(true, false, false, false, false, false);
         directoryChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
@@ -67,7 +69,7 @@ public class PluginSettingsConfigurable implements Configurable {
             selectedSubDirectory = project.getBaseDir();
         }
 
-        pluginSettingsForm.getBtn_ft().addActionListener(e -> {
+        pluginSettingsForm.getTerminalFileChooserButton().addActionListener(e -> {
             VirtualFile[] chosenTerminals = new FileChooserDialogImpl(terminalChooserDescriptor, project)
                     .choose(project, selectedTerminal);
 
@@ -76,17 +78,16 @@ public class PluginSettingsConfigurable implements Configurable {
                 if (file != null) {
                     String canonicalPath = file.getCanonicalPath();
                     Terminal terminal = Terminal.fromString(canonicalPath);
-                    if (terminal != Terminal.GENERIC) {
-                        selectedTerminal = file;
-                        pluginSettingsForm.getFavoriteTerminalField().setText(canonicalPath);
-                    } else {
-                        Messages.showErrorDialog("This Terminal is not supported", "Error");
+                    if (terminal == Terminal.GENERIC) {
+                        Messages.showWarningDialog(warningMessage, "Warning");
                     }
+                    selectedTerminal = file;
+                    pluginSettingsForm.getFavoriteTerminalField().setText(canonicalPath);
                 }
             }
         });
 
-        pluginSettingsForm.getBtn_sd().addActionListener(e -> {
+        pluginSettingsForm.getDirectoryFileChooserButton().addActionListener(e -> {
             VirtualFile[] chosenDirectories = new FileChooserDialogImpl(directoryChooserDescriptor, project)
                     .choose(project, selectedSubDirectory);
 

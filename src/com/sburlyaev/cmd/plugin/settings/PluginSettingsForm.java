@@ -7,8 +7,8 @@ public class PluginSettingsForm {
     private JTextField favoriteTerminalField;
     private JTextField subDirectoryField;
     private JPanel settingsPanel;
-    private JButton btn_ft;
-    private JButton btn_sd;
+    private JButton terminalFileChooserButton;
+    private JButton directoryFileChooserButton;
 
     public JPanel getSettingsPanel() {
         return settingsPanel;
@@ -31,11 +31,11 @@ public class PluginSettingsForm {
         return subDirectoryField;
     }
 
-    public JButton getBtn_ft() {
-        return btn_ft;
+    public JButton getTerminalFileChooserButton() {
+        return terminalFileChooserButton;
     }
 
-    public JButton getBtn_sd() {
-        return btn_sd;
+    public JButton getDirectoryFileChooserButton() {
+        return directoryFileChooserButton;
     }
 }
