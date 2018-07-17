@@ -24,8 +24,7 @@
     </description>
 
     <change-notes><![CDATA[
-      - Added File Chooser functionality for the plugin settings menu.
-       (Thanks Void Young)
+      - Added File Chooser functionality for the plugin settings menu (Thanks Void Young).
     ]]>
     </change-notes>
 

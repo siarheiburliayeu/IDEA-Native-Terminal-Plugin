@@ -1,5 +1,8 @@
 package com.sburlyaev.cmd.plugin;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
@@ -8,9 +11,6 @@ import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.settings.PluginSettings;
 import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
-
-import java.io.File;
-import java.io.IOException;
 
 public class OpenCmd extends AnAction {
 
@@ -58,19 +58,19 @@ public class OpenCmd extends AnAction {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(project.getBaseDir().getCanonicalPath());
+        sb.append(project.getBasePath());
         if (settings != null) {
             // Introduce subdirectory support (v0.2)
             String subDirectory = settings.getSubDirectory();
             if (subDirectory != null && !subDirectory.isEmpty()) {
-                //Add other directory support -longforus
                 File file = new File(subDirectory);
                 if (file.exists()) {
-                    return subDirectory;
-                } else {
-                    sb.append(File.separatorChar);
-                    sb.append(subDirectory);
+                    return subDirectory;  // Another directory support -longforus
                 }
+                if (!(subDirectory.startsWith("/") || subDirectory.startsWith("\\"))) {
+                    sb.append(File.separatorChar);
+                }
+                sb.append(subDirectory);
             }
         }
         return sb.toString();
