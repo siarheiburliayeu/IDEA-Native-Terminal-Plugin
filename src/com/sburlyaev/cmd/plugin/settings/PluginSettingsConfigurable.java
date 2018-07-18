@@ -10,10 +10,11 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.sburlyaev.cmd.plugin.model.Terminal;
 import org.apache.http.util.TextUtils;
+import org.jdesktop.swingx.util.OS;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.io.File;
 
 public class PluginSettingsConfigurable implements Configurable {
@@ -30,7 +31,8 @@ public class PluginSettingsConfigurable implements Configurable {
     private final String warningMessage = "The selected terminal currently is not supported and may not work properly";
 
     public PluginSettingsConfigurable() {
-        terminalChooserDescriptor = new FileChooserDescriptor(true, false, false, false, false, false);
+        // Set 'chooseFolders' depend on OS, because macOS application represents a directory.
+        terminalChooserDescriptor = new FileChooserDescriptor(true, OS.isMacOSX(), false, false, false, false);
         directoryChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
 
         Project[] openProjects = ProjectManager.getInstance().getOpenProjects();
