@@ -59,6 +59,8 @@ public class CommandBuilder {
                 switch (terminal) {
                     case GNOME_TERMINAL:
                         return new Command(command, "--working-directory", projectDirectory);
+                    case RXVT:
+                        return new Command(command, "-cd", projectDirectory);
 
                     default:
                         return new Command(command);

@@ -6,6 +6,7 @@ public enum Terminal {
     CON_EMU("conemu"),
     GIT_BASH("git-bash"),
     GNOME_TERMINAL("gnome-terminal"),
+    RXVT("rxvt"),
     MAC_TERMINAL("Terminal"),
     I_TERM("iTerm"),
     GENERIC("");
@@ -31,6 +32,8 @@ public enum Terminal {
             return GIT_BASH;
         } else if (containsIgnoreCase(command, GNOME_TERMINAL.command)) {
             return GNOME_TERMINAL;
+        } else if (containsIgnoreCase(command, RXVT.command)) {
+            return RXVT;
         } else if (containsIgnoreCase(command, MAC_TERMINAL.command)) {
             return MAC_TERMINAL;
         } else if (containsIgnoreCase(command, I_TERM.command)) {
