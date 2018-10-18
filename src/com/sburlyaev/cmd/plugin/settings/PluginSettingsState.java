@@ -6,13 +6,15 @@ public class PluginSettingsState {
 
     private String favoriteTerminal;
     private String subDirectory;
+    private boolean openCurrent;
 
     public PluginSettingsState() {
     }
 
-    public PluginSettingsState(String favoriteTerminal, String subDirectory) {
+    public PluginSettingsState(String favoriteTerminal, String subDirectory, boolean openCurrent) {
         this.favoriteTerminal = favoriteTerminal;
         this.subDirectory = subDirectory;
+        this.openCurrent = openCurrent;
     }
 
     public String getFavoriteTerminal() {
@@ -31,6 +33,14 @@ public class PluginSettingsState {
         this.subDirectory = subDirectory;
     }
 
+    public boolean isOpenCurrent() {
+        return openCurrent;
+    }
+
+    public void setOpenCurrent(boolean openCurrent) {
+        this.openCurrent = openCurrent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,11 +48,12 @@ public class PluginSettingsState {
 
         PluginSettingsState that = (PluginSettingsState) o;
         return Objects.equals(favoriteTerminal, that.favoriteTerminal) &&
-                Objects.equals(subDirectory, that.subDirectory);
+                Objects.equals(subDirectory, that.subDirectory) &&
+                Objects.equals(openCurrent, that.openCurrent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(favoriteTerminal, subDirectory);
+        return Objects.hash(favoriteTerminal, subDirectory, openCurrent);
     }
 }

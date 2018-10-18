@@ -2,11 +2,14 @@ package com.sburlyaev.cmd.plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.settings.PluginSettings;
@@ -55,6 +58,15 @@ public class OpenCmd extends AnAction {
         Project project = event.getProject();
         if (project == null) {
             return System.getProperty("user.home");
+        }
+
+        if (settings != null && settings.isOpenCurrent()) {
+            FileEditorManager manager = FileEditorManager.getInstance(project);
+            VirtualFile[] openFiles = manager.getSelectedFiles();
+            if (openFiles.length > 0) {
+                VirtualFile openFile = openFiles[0];
+                return Paths.get(openFile.getPath()).getParent().toString();
+            }
         }
 
         StringBuilder sb = new StringBuilder();
