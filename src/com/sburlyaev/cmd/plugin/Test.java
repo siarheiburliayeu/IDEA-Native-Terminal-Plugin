@@ -1,8 +1,8 @@
 package com.sburlyaev.cmd.plugin;
 
-import com.sburlyaev.cmd.plugin.model.Command;
-
 import java.io.IOException;
+
+import com.sburlyaev.cmd.plugin.model.Command;
 
 public class Test {
 
@@ -24,12 +24,13 @@ public class Test {
         String command3 = "-a";
         String command4 = "Terminal";
 
-        Command commandX = new Command("C:/Program Files/Git/git-bash.exe",
-//                "--cd=C:/Users/buser/IdeaProjects/Project With Spaces");
-                "--cd=C:/");
+        // bash on windows
+        Command commandX = new Command("cmd", "/k", "start",
+                "/d", "C:/Users/Siarhei_Burliayeu".replace("/", "\\"), "bash");
         System.out.println(commandX.getCommands());
         commandX.execute();
 
+        System.out.println();
 //        ProcessBuilder processBuilder = new ProcessBuilder(command1, command2, command3, command4);
 //        System.out.println(processBuilder.command());
 //        Process process = processBuilder.start();

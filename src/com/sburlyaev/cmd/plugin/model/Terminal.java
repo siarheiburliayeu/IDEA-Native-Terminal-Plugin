@@ -5,6 +5,7 @@ public enum Terminal {
     POWER_SHELL("powershell"),
     CON_EMU("conemu"),
     GIT_BASH("git-bash"),
+    BASH("bash"),
     GNOME_TERMINAL("gnome-terminal"),
     RXVT("rxvt"),
     MAC_TERMINAL("Terminal"),
@@ -30,6 +31,8 @@ public enum Terminal {
             return CON_EMU;
         } else if (containsIgnoreCase(command, GIT_BASH.command)) {
             return GIT_BASH;
+        } else if (containsIgnoreCase(command, BASH.command)) {
+            return BASH;
         } else if (containsIgnoreCase(command, GNOME_TERMINAL.command)) {
             return GNOME_TERMINAL;
         } else if (containsIgnoreCase(command, RXVT.command)) {

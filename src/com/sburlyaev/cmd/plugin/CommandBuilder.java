@@ -1,15 +1,16 @@
 package com.sburlyaev.cmd.plugin;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.intellij.openapi.diagnostic.Logger;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
 import com.sburlyaev.cmd.plugin.model.Terminal;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 
 public class CommandBuilder {
 
@@ -50,6 +51,10 @@ public class CommandBuilder {
 
                     case GIT_BASH:
                         return new Command(command, "--cd=" + projectDirectory);
+
+                    case BASH:
+                        return new Command("cmd", "/k", "start", "/d",
+                                projectDirectory.replace("/", "\\"), command);
 
                     default:
                         return new Command("cmd", "/c", "start", command);
