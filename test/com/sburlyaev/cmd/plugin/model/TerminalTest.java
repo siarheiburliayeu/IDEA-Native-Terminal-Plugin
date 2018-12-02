@@ -1,8 +1,8 @@
 package com.sburlyaev.cmd.plugin.model;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class TerminalTest {
 
@@ -44,7 +44,25 @@ public class TerminalTest {
 
     @Test
     public void testFromStringConEmuPath() {
+        Terminal result = Terminal.fromString("C:/Program Files/ConEmu/ConEmu64.exe");
+        assertEquals(Terminal.CON_EMU, result);
+    }
+
+    @Test
+    public void testFromStringConEmuPath2() {
         Terminal result = Terminal.fromString("C:\\Program Files\\ConEmu\\ConEmu64.exe");
+        assertEquals(Terminal.CON_EMU, result);
+    }
+
+    @Test
+    public void testFromStringConEmuPathWithCmd() {
+        Terminal result = Terminal.fromString("C:/cmds/ConEmu/ConEmu64.exe");
+        assertEquals(Terminal.CON_EMU, result);
+    }
+
+    @Test
+    public void testFromStringConEmuPathWithCmd2() {
+        Terminal result = Terminal.fromString("C:\\cmds\\ConEmu\\ConEmu64.exe");
         assertEquals(Terminal.CON_EMU, result);
     }
 
@@ -74,6 +92,12 @@ public class TerminalTest {
 
     @Test
     public void testFromStringGitBashPath() {
+        Terminal result = Terminal.fromString("C:/Program Files/Git/git-bash.exe");
+        assertEquals(Terminal.GIT_BASH, result);
+    }
+
+    @Test
+    public void testFromStringGitBashPath2() {
         Terminal result = Terminal.fromString("C:\\Program Files\\Git\\git-bash.exe");
         assertEquals(Terminal.GIT_BASH, result);
     }
