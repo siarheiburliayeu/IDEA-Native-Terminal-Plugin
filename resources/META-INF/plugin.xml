@@ -23,7 +23,7 @@
     </description>
 
     <change-notes><![CDATA[
-      - Windows: added support for bash (using Windows Subsystem for Linux).
+      - Update terminal detection mechanism for all platforms.
     ]]>
     </change-notes>
 
