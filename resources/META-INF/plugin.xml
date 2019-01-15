@@ -1,13 +1,13 @@
 <idea-plugin>
     <id>com.sburlyaev.terminal.plugin</id>
     <name>Native Terminal</name>
-    <version>0.2.5</version>
+    <version>0.3</version>
     <vendor email="sburlyaev7@gmail.com"
             url="https://github.com/sburlyaev/IDEA-Native-Terminal-Plugin">Sergey Burlyaev
     </vendor>
 
     <description><![CDATA[
-      adds a terminal icon to the IDE toolbar to open a project directory in your favorite terminal.
+      adds a Terminal icon to the IDE toolbar and Project context menu item to open project directories in your favorite terminal.
       <br>
       <br>By default, it uses OS native terminal:
       <br>Windows - Command Prompt (cmd)
@@ -17,13 +17,11 @@
       <br>If you want to use another terminal instead - you can!
       <br>Just specify your favorite one in the <strong>IDE Settings / Preferences</strong>.
       <br><i>*PowerShell, ConEmu, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
-      <br>
-      <br>Also, you can specify a <i>subdirectory</i> into your project to be opened instead of the root project directory.
     ]]>
     </description>
 
     <change-notes><![CDATA[
-      - Update terminal detection mechanism for all platforms.
+      - Introduce Project context menu item - 'Open in external Terminal'.
     ]]>
     </change-notes>
 
@@ -41,12 +39,18 @@
     </extensions>
 
     <actions>
-        <action id="com.sburlyaev.cmd.plugin.OpenCmd"
-                class="com.sburlyaev.cmd.plugin.OpenCmd"
+        <action id="com.sburlyaev.cmd.plugin.actions.OpenTerminal"
+                class="com.sburlyaev.cmd.plugin.actions.OpenProjectDirectoryAction"
                 text="Terminal"
                 icon="/cmd-icon-16.png">
             <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <add-to-group group-id="MainToolBar" anchor="last"/>
+        </action>
+        <action id="com.sburlyaev.cmd.plugin.actions.OpenInTerminal"
+                class="com.sburlyaev.cmd.plugin.actions.OpenSelectedDirectoryAction"
+                text="Open in external Terminal"
+                icon="/cmd-icon-16.png">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="ProjectViewPopupMenuRunGroup"/>
         </action>
     </actions>
 

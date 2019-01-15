@@ -2,6 +2,7 @@ package com.sburlyaev.cmd.plugin;
 
 import java.io.IOException;
 
+import com.sburlyaev.cmd.plugin.actions.OpenTerminalBaseAction;
 import com.sburlyaev.cmd.plugin.model.Command;
 
 public class Test {
@@ -16,8 +17,8 @@ public class Test {
         System.out.println("OS version : " + osVersion);
         System.out.println("GUI: " + gui);
 
-        String favoriteTerminal = System.getenv(OpenCmd.ENV_FAVORITE_TERMINAL);
-        System.out.println(OpenCmd.ENV_FAVORITE_TERMINAL + ": " + favoriteTerminal);
+//        String favoriteTerminal = System.getenv(OpenTerminalBaseAction.ENV_FAVORITE_TERMINAL);
+//        System.out.println(OpenTerminalBaseAction.ENV_FAVORITE_TERMINAL + ": " + favoriteTerminal);
 
         String command1 = "open";
         String command2 = "/Users/user/IdeaProjects/Project With Spaces";

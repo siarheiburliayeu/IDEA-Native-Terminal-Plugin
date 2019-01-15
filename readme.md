@@ -1,5 +1,5 @@
 <h2>Native Terminal Plugin</h2>
-Adds a terminal icon to the IDE toolbar to open a project directory in your favorite terminal.
+Adds a Terminal icon to the IDE toolbar and Project context menu item to open project directories in your favorite terminal.
 
 <br>By default, it uses OS native terminal:
 * `cmd` - for Windows
@@ -9,5 +9,3 @@ Adds a terminal icon to the IDE toolbar to open a project directory in your favo
 If you want to use another terminal instead - you can!
 <br>Just specify your favorite one in the **IDE Settings / Preferences**.
 <br>_*PowerShell, ConEmu, Bash (WSL), GitBash, RXVT, iTerm are also supported._
-
-Also, you can specify a _subdirectory_ into your project to be opened instead of the root project directory.

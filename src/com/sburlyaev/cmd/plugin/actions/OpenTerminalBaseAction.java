@@ -1,35 +1,39 @@
-package com.sburlyaev.cmd.plugin;
+package com.sburlyaev.cmd.plugin.actions;
 
-import java.io.File;
 import java.io.IOException;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
+import com.sburlyaev.cmd.plugin.CommandBuilder;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.settings.PluginSettings;
 import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
 
-public class OpenCmd extends AnAction {
+public abstract class OpenTerminalBaseAction extends AnAction {
 
-    private static final Logger log = Logger.getInstance(OpenCmd.class);
+    private static final Logger log = Logger.getInstance(OpenTerminalBaseAction.class);
 
     @Deprecated
     protected static final String ENV_FAVORITE_TERMINAL = "FAVORITE_TERMINAL";
 
+    @NotNull
+    protected abstract String getDirectory(AnActionEvent event, PluginSettingsState settings);
+
     @Override
-    public void actionPerformed(AnActionEvent event) {
+    public void actionPerformed(@NotNull AnActionEvent event) {
         try {
             Environment env = Environment.getEnvironment();
             log.info(env.toString());
 
             PluginSettingsState settings = PluginSettings.getInstance().getState();
-            final String projectDirectory = getProjectDirectory(event, settings);
+            final String directory = getDirectory(event, settings);
             final String favoriteTerminalString = getFavoriteTerminal(settings);
 
-            Command command = CommandBuilder.createCommand(env, projectDirectory, favoriteTerminalString);
+            Command command = CommandBuilder.createCommand(env, directory, favoriteTerminalString);
             log.info(command.getCommands().toString());
             command.execute();
 
@@ -49,30 +53,5 @@ public class OpenCmd extends AnAction {
             }
         }
         return envFavoriteTerminal;
-    }
-
-    private String getProjectDirectory(AnActionEvent event, PluginSettingsState settings) {
-        Project project = event.getProject();
-        if (project == null) {
-            return System.getProperty("user.home");
-        }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(project.getBasePath());
-        if (settings != null) {
-            // Introduce subdirectory support (v0.2)
-            String subDirectory = settings.getSubDirectory();
-            if (subDirectory != null && !subDirectory.isEmpty()) {
-                File file = new File(subDirectory);
-                if (file.exists()) {
-                    return subDirectory;  // Another directory support -longforus
-                }
-                if (!(subDirectory.startsWith("/") || subDirectory.startsWith("\\"))) {
-                    sb.append(File.separatorChar);
-                }
-                sb.append(subDirectory);
-            }
-        }
-        return sb.toString();
     }
 }
