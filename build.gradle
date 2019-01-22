@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.1'
+}
+
+group 'com.sburlyaev.terminal.plugin'
+version '0.3.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+intellij {
+    version 'IC-2016.2'
+    updateSinceUntilBuild false
+}
+
+patchPluginXml {
+    pluginDescription """
+      adds a Terminal icon to the IDE toolbar and Project context menu item to open project directories in your favorite terminal.
+      <br>
+      <br>By default, it uses OS native terminal:
+      <br>Windows - Command Prompt (cmd)
+      <br>Linux - gnome-terminal
+      <br>macOS - Terminal.app
+      <br>
+      <br>If you want to use another terminal instead - you can!
+      <br>Just specify your favorite one in the <strong>IDE Settings / Preferences</strong>.
+      <br><i>*PowerShell, ConEmu, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
+  """
+    changeNotes """
+      - Introduce Project context menu item - 'Open in external Terminal'.
+  """
+}

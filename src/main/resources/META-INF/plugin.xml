@@ -1,0 +1,38 @@
+<idea-plugin>
+    <id>com.sburlyaev.terminal.plugin</id>
+    <name>Native Terminal</name>
+    <version/>
+    <vendor email="sburlyaev7@gmail.com"
+            url="https://github.com/sburlyaev/IDEA-Native-Terminal-Plugin">Sergey Burlyaev</vendor>
+    <description/>
+    <change-notes/>
+
+    <!-- http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145"/>
+
+    <!-- http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable id="com.sburlyaev.cmd.plugin.PluginSettings"
+                                 instance="com.sburlyaev.cmd.plugin.settings.PluginSettingsConfigurable"/>
+        <applicationService serviceImplementation="com.sburlyaev.cmd.plugin.settings.PluginSettings"/>
+    </extensions>
+
+    <actions>
+        <action id="com.sburlyaev.cmd.plugin.actions.OpenTerminal"
+                class="com.sburlyaev.cmd.plugin.actions.OpenProjectDirectoryAction"
+                text="Terminal"
+                icon="Icons.TERMINAL_ICON">
+            <add-to-group group-id="NavBarToolBar" anchor="first"/>
+            <add-to-group group-id="MainToolBar" anchor="last"/>
+        </action>
+        <action id="com.sburlyaev.cmd.plugin.actions.OpenInTerminal"
+                class="com.sburlyaev.cmd.plugin.actions.OpenSelectedDirectoryAction"
+                text="Open in external Terminal"
+                icon="Icons.TERMINAL_ICON">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after"
+                          relative-to-action="ProjectViewPopupMenuRunGroup"/>
+        </action>
+    </actions>
+</idea-plugin>
