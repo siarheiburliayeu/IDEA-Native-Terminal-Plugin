@@ -26,17 +26,12 @@ public class Test {
         String command4 = "Terminal";
 
         // bash on windows
-        Command commandX = new Command("cmd", "/k", "start",
-                "/d", "C:/Users/Siarhei_Burliayeu".replace("/", "\\"), "bash");
-        System.out.println(commandX.getCommands());
-        commandX.execute();
+//        Command commandX = new Command("cmd", "/k", "start",
+//                "/d", "C:/Users/Siarhei_Burliayeu".replace("/", "\\"), "bash");
+//        System.out.println(commandX.getCommands());
 
-        System.out.println();
-//        ProcessBuilder processBuilder = new ProcessBuilder(command1, command2, command3, command4);
-//        System.out.println(processBuilder.command());
-//        Process process = processBuilder.start();
-
-//        System.out.println(new BufferedReader(new InputStreamReader(process.getErrorStream()))
-//                .lines().collect(Collectors.joining("\n")));
+        Command command5 = new Command("C:/cmder_mini/Cmder.exe", "/start",
+                "C:/Users/Siarhei_Burliayeu");
+        command5.execute();
     }
 }

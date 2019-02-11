@@ -8,4 +8,4 @@ Adds a Terminal icon to the IDE toolbar and Project context menu item to open pr
 
 If you want to use another terminal instead - you can!
 <br>Just specify your favorite one in the **IDE Settings / Preferences**.
-<br>_*PowerShell, ConEmu, Bash (WSL), GitBash, RXVT, iTerm are also supported._
+<br>_*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported._

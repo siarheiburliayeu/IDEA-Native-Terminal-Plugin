@@ -3,6 +3,7 @@ package com.sburlyaev.cmd.plugin.model;
 import java.io.File;
 
 public enum Terminal {
+    CMDER("cmder"),
     COMMAND_PROMPT("cmd"),
     POWER_SHELL("powershell"),
     CON_EMU("conemu"),
@@ -26,7 +27,9 @@ public enum Terminal {
 
     public static Terminal fromString(String command) {
         String executable = getExecutable(command);
-        if (containsIgnoreCase(executable, COMMAND_PROMPT.command)) {
+        if (containsIgnoreCase(executable, CMDER.command)) {
+            return CMDER;
+        } else if (containsIgnoreCase(executable, COMMAND_PROMPT.command)) {
             return COMMAND_PROMPT;
         } else if (containsIgnoreCase(executable, POWER_SHELL.command)) {
             return POWER_SHELL;

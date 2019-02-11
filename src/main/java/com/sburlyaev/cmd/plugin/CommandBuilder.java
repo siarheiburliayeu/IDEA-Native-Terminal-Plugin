@@ -49,6 +49,9 @@ public class CommandBuilder {
                         }
                         return executableCommand;
 
+                    case CMDER:
+                        return new Command(command, "/start", projectDirectory);
+
                     case GIT_BASH:
                         return new Command(command, "--cd=" + projectDirectory);
 

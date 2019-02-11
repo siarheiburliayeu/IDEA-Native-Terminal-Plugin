@@ -32,9 +32,9 @@ patchPluginXml {
       <br>
       <br>If you want to use another terminal instead - you can!
       <br>Just specify your favorite one in the <strong>IDE Settings / Preferences</strong>.
-      <br><i>*PowerShell, ConEmu, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
+      <br><i>*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
   """
     changeNotes """
-      - Introduce Project context menu item - 'Open in external Terminal'.
+      - Windows: Added support for Cmder.
   """
 }

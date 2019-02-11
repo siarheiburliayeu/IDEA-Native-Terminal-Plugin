@@ -68,6 +68,7 @@ public class PluginSettingsConfigurable implements Configurable {
             }
         }
         if (selectedSubDirectory == null) {
+            // todo: project.getBaseDir() deprecated in 2018.3
             selectedSubDirectory = project.getBaseDir();
         }
 
