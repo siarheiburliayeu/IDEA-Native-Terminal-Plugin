@@ -50,7 +50,15 @@ public class CommandBuilder {
                         return executableCommand;
 
                     case CMDER:
-                        return new Command(command, "/start", projectDirectory);
+                        double windowsVersion = OperationSystem.parseWindowsVersion(env.getOsVersion());
+
+                        if (windowsVersion < 10.0) {
+                            // todo: prior to Windows 10 (Windows 8.1, 8, 7, Vista, XP, 2000)
+                            return new Command(command, "/task", "cmder", projectDirectory);
+                        } else {
+                            // Windows 10
+                            return new Command(command, "/start", projectDirectory);
+                        }
 
                     case GIT_BASH:
                         return new Command(command, "--cd=" + projectDirectory);

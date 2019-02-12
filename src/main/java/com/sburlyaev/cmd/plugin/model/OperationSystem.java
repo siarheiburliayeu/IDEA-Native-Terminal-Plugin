@@ -4,6 +4,8 @@ import static com.sburlyaev.cmd.plugin.model.Terminal.COMMAND_PROMPT;
 import static com.sburlyaev.cmd.plugin.model.Terminal.GNOME_TERMINAL;
 import static com.sburlyaev.cmd.plugin.model.Terminal.MAC_TERMINAL;
 
+import com.intellij.openapi.diagnostic.Logger;
+
 public enum OperationSystem {
     WINDOWS("win", COMMAND_PROMPT),
     LINUX("lin", GNOME_TERMINAL),
@@ -11,6 +13,8 @@ public enum OperationSystem {
 
     private final String name;
     private final Terminal defaultTerminal;
+
+    private static final Logger log = Logger.getInstance(OperationSystem.class);
 
     OperationSystem(String name, Terminal defaultTerminal) {
         this.name = name;
@@ -33,5 +37,15 @@ public enum OperationSystem {
         } else {
             throw new RuntimeException("This Operation System is not supported: " + osName + " (" + os + ")");
         }
+    }
+
+    public static double parseWindowsVersion(String windowsVersion) {
+        double version = -1.0;
+        try {
+            version = Double.parseDouble(windowsVersion);
+        } catch (Exception e) {
+            log.error("Failed to parse Windows version: " + windowsVersion, e);
+        }
+        return version;
     }
 }

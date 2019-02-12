@@ -26,6 +26,7 @@ public abstract class OpenTerminalBaseAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
         try {
+            // todo: move to static field?
             Environment env = Environment.getEnvironment();
             log.info(env.toString());
 
