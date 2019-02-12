@@ -35,6 +35,6 @@ patchPluginXml {
       <br><i>*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
   """
     changeNotes """
-      - Windows: Added support for Cmder.
+      - Windows 7: Fix for Cmder.
   """
 }
