@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.sburlyaev.terminal.plugin'
-version '0.3.2'
+version '0.3.3'
 
 sourceCompatibility = 1.8
 
@@ -35,6 +35,6 @@ patchPluginXml {
       <br><i>*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
   """
     changeNotes """
-      - Windows 7: Fix for Cmder.
+      Windows 7: Fix for Cmder.
   """
 }
