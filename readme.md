@@ -1,5 +1,5 @@
 <h2>Native Terminal Plugin</h2>
-Adds a Terminal icon to the IDE toolbar and Project context menu item to open project directories in your favorite terminal.
+Adds a Terminal icon to the IDE toolbar and context menu to open project directories in your favorite terminal.
 
 <br>By default, it uses OS native terminal:
 * `cmd` - for Windows

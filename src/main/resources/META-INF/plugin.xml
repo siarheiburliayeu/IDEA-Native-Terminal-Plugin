@@ -31,8 +31,10 @@
                 class="com.sburlyaev.cmd.plugin.actions.OpenSelectedDirectoryAction"
                 text="Open in external Terminal"
                 icon="Icons.TERMINAL_ICON">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="after"
-                          relative-to-action="ProjectViewPopupMenuRunGroup"/>
+            <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="after"-->
+                          <!--relative-to-action="ProjectViewPopupMenuRunGroup"/>-->
+            <add-to-group group-id="RunContextPopupGroup" anchor="before"
+                          relative-to-action="OpenInBrowserGroup"/>
         </action>
     </actions>
 </idea-plugin>

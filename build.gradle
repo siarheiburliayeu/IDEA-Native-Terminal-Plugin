@@ -23,7 +23,7 @@ intellij {
 
 patchPluginXml {
     pluginDescription """
-      adds a Terminal icon to the IDE toolbar and Project context menu item to open project directories in your favorite terminal.
+      adds a Terminal icon to the IDE toolbar and context menu to open project directories in your favorite terminal.
       <br>
       <br>By default, it uses OS native terminal:
       <br>Windows - Command Prompt (cmd)
@@ -35,6 +35,6 @@ patchPluginXml {
       <br><i>*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
   """
     changeNotes """
-      Windows 7: Fix for Cmder.
+      Added 'Open in external Terminal' to editor context menu.
   """
 }

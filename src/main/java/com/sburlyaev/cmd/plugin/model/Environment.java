@@ -13,6 +13,7 @@ public class Environment {
     }
 
     public static Environment getEnvironment() {
+        // todo: use com.intellij.openapi.util.SystemInfo
         String osName = System.getProperty("os.name");
         String osVersion = System.getProperty("os.version");
         String gui = System.getProperty("sun.desktop");
