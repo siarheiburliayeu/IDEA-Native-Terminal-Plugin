@@ -2,8 +2,8 @@
 Adds a Terminal icon to the IDE toolbar and context menu to open project directories in your favorite terminal.
 
 <br>By default, it uses OS native terminal:
-* `cmd` - for Windows
-* `gnome-terminal` - for Linux
+* `cmd` _(Command Prompt)_ - for Windows
+* `gnome-terminal`/`konsole` - for Linux
 * `Terminal.app` - for macOS
 
 If you want to use another terminal instead - you can!

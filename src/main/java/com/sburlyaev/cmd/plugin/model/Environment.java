@@ -1,5 +1,7 @@
 package com.sburlyaev.cmd.plugin.model;
 
+import java.io.File;
+
 public class Environment {
 
     private final OperationSystem os;
@@ -21,6 +23,29 @@ public class Environment {
         OperationSystem os = OperationSystem.fromString(osName);
 
         return new Environment(os, osVersion, gui);
+    }
+
+    public Terminal getDefaultTerminal() {
+        switch (os) {
+
+            case WINDOWS:
+                return Terminal.COMMAND_PROMPT;
+
+            case MAC_OS:
+                return Terminal.MAC_TERMINAL;
+
+            case LINUX:
+                if (gui != null && gui.toLowerCase().contains("gnome")) {
+                    return Terminal.GNOME_TERMINAL;
+                }
+                if (new File(Terminal.GNOME_TERMINAL.getDefaultPath()).exists()) {
+                    return Terminal.GNOME_TERMINAL;
+                }
+                // todo: KDE?
+                return Terminal.KONSOLE;
+            default:
+                throw new IllegalArgumentException("os: " + os);
+        }
     }
 
     public OperationSystem getOs() {

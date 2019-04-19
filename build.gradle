@@ -27,7 +27,7 @@ patchPluginXml {
       <br>
       <br>By default, it uses OS native terminal:
       <br>Windows - Command Prompt (cmd)
-      <br>Linux - gnome-terminal
+      <br>Linux - gnome-terminal / konsole
       <br>macOS - Terminal.app
       <br>
       <br>If you want to use another terminal instead - you can!
@@ -35,6 +35,6 @@ patchPluginXml {
       <br><i>*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
   """
     changeNotes """
-      Added 'Open in external Terminal' to editor context menu.
+      Added support for Konsole terminal.
   """
 }

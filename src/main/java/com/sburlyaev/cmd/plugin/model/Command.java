@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Command {
@@ -12,6 +13,7 @@ public class Command {
 
     public Command(String... commands) {
         this.commands = Arrays.stream(commands)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
@@ -26,5 +28,12 @@ public class Command {
 
     public List<String> getCommands() {
         return new ArrayList<>(commands);
+    }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "commands=" + commands +
+                '}';
     }
 }

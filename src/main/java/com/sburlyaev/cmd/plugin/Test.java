@@ -1,12 +1,15 @@
 package com.sburlyaev.cmd.plugin;
 
-import java.io.IOException;
-
-import com.sburlyaev.cmd.plugin.actions.OpenTerminalBaseAction;
 import com.sburlyaev.cmd.plugin.model.Command;
-import com.sburlyaev.cmd.plugin.model.OperationSystem;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Test {
+
+    private static final Pattern OS_VERSION_PATTERN = Pattern.compile("^(\\d+\\.\\d+).*");
 
     public static void main(String[] args) throws IOException {
         String osName = System.getProperty("os.name");
@@ -16,30 +19,33 @@ public class Test {
         String shortName = osName.substring(0, 3).toLowerCase();
         System.out.println("OS name: " + osName + " (" + shortName + ")");
         System.out.println("OS version: " + osVersion);
-        System.out.println("Parsed version: " + Double.parseDouble(osVersion));
+        System.out.println("Parsed version: " + parseOsVersion(osVersion)); // windows only?
         System.out.println("GUI: " + gui);
 
-//        String favoriteTerminal = System.getenv(OpenTerminalBaseAction.ENV_FAVORITE_TERMINAL);
-//        System.out.println(OpenTerminalBaseAction.ENV_FAVORITE_TERMINAL + ": " + favoriteTerminal);
+        System.out.println("/usr/bin/gnome-terminal: " + new File("/usr/bin/gnome-terminal").exists());
+        System.out.println("/usr/bin/konsole: " + new File("/usr/bin/konsole").exists());
 
-        String command1 = "open";
-        String command2 = "/Users/user/IdeaProjects/Project With Spaces";
-        String command3 = "-a";
-        String command4 = "Terminal";
+        String command1 = "konsole";
+        String command2 = "--new-tab";
+        String command3 = "--workdir";
+        String command4 = System.getProperty("user.dir");
 
-        // bash on windows
-//        Command commandX = new Command("cmd", "/k", "start",
-//                "/d", "C:/Users/Siarhei_Burliayeu".replace("/", "\\"), "bash");
-//        System.out.println(commandX.getCommands());
+        Command command = new Command(command1, command2, command3, command4);
+        System.out.println(command);
+        command.execute();
+    }
 
-        Command commandCC = new Command("C:/cmder_mini/Cmder.exe", "/start", "C:/Users/Siarhei_Burliayeu/IdeaProjects");
-        Command commandCD = new Command("C:/cmder_mini/Cmder.exe", "/start", "D:/Users/Siarhei_Burliayeu/IdeaProjects");
-        Command commandDC = new Command("D:/cmder_mini/Cmder.exe", "/start", "C:/Users/Siarhei_Burliayeu/IdeaProjects");
-        Command commandDD = new Command("D:/cmder_mini/Cmder.exe", "/start", "D:/Users/Siarhei_Burliayeu/IdeaProjects");
-        Command commandCC2 = new Command("C:/cmder_mini/Cmder.exe", "/task", "cmder", "C:/Users/Siarhei_Burliayeu/IdeaProjects");
-        Command commandCD2 = new Command("C:/cmder_mini/Cmder.exe", "/task", "cmder", "D:/Users/Siarhei_Burliayeu/IdeaProjects");
-        Command commandDC2 = new Command("D:/cmder_mini/Cmder.exe", "/task", "cmder", "C:/Users/Siarhei_Burliayeu/IdeaProjects");
-        Command commandDD2 = new Command("D:/cmder_mini/Cmder.exe", "/task", "cmder", "D:/Users/Siarhei_Burliayeu/IdeaProjects");
-        commandCD2.execute();
+    private static double parseOsVersion(String windowsVersion) {
+        double version = -1.0;
+        try {
+            Matcher matcher = OS_VERSION_PATTERN.matcher(windowsVersion);
+            if (matcher.matches()) {
+                String group1 = matcher.group(1);
+                version = Double.parseDouble(group1);
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to parse Windows version: " + windowsVersion);
+        }
+        return version;
     }
 }

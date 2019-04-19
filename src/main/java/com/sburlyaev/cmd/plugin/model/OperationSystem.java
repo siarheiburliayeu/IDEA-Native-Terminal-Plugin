@@ -1,28 +1,23 @@
 package com.sburlyaev.cmd.plugin.model;
 
-import static com.sburlyaev.cmd.plugin.model.Terminal.COMMAND_PROMPT;
-import static com.sburlyaev.cmd.plugin.model.Terminal.GNOME_TERMINAL;
-import static com.sburlyaev.cmd.plugin.model.Terminal.MAC_TERMINAL;
-
 import com.intellij.openapi.diagnostic.Logger;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public enum OperationSystem {
-    WINDOWS("win", COMMAND_PROMPT),
-    LINUX("lin", GNOME_TERMINAL),
-    MAC_OS("mac", MAC_TERMINAL);
+    WINDOWS("win"),
+    LINUX("lin"),
+    MAC_OS("mac");
+
+    private static final Pattern OS_VERSION_PATTERN = Pattern.compile("^(\\d+\\.\\d+).*");
 
     private final String name;
-    private final Terminal defaultTerminal;
 
     private static final Logger log = Logger.getInstance(OperationSystem.class);
 
-    OperationSystem(String name, Terminal defaultTerminal) {
+    OperationSystem(String name) {
         this.name = name;
-        this.defaultTerminal = defaultTerminal;
-    }
-
-    public Terminal getDefaultTerminal() {
-        return defaultTerminal;
     }
 
     public static OperationSystem fromString(String osName) {
@@ -39,12 +34,16 @@ public enum OperationSystem {
         }
     }
 
-    public static double parseWindowsVersion(String windowsVersion) {
+    public static double parseOsVersion(String windowsVersion) {
         double version = -1.0;
         try {
-            version = Double.parseDouble(windowsVersion);
+            Matcher matcher = OS_VERSION_PATTERN.matcher(windowsVersion);
+            if (matcher.matches()) {
+                String group1 = matcher.group(1);
+                version = Double.parseDouble(group1);
+            }
         } catch (Exception e) {
-            log.error("Failed to parse Windows version: " + windowsVersion, e);
+            log.error("Failed to parse OS version: " + windowsVersion, e);
         }
         return version;
     }

@@ -1,16 +1,15 @@
 package com.sburlyaev.cmd.plugin;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import com.intellij.openapi.diagnostic.Logger;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
 import com.sburlyaev.cmd.plugin.model.Terminal;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class CommandBuilder {
 
@@ -21,13 +20,14 @@ public class CommandBuilder {
                                         @Nullable String favoriteTerminalString) throws FileNotFoundException {
         checkProjectDirectory(projectDirectory);
 
-        OperationSystem os = env.getOs();
-        String command = favoriteTerminalString == null
-                ? os.getDefaultTerminal().getCommand()
-                : favoriteTerminalString;
+        String command = favoriteTerminalString != null
+                ? favoriteTerminalString
+                : env.getDefaultTerminal().getCommand();
+
         Terminal terminal = Terminal.fromString(command);
         log.info("Favorite terminal is [" + favoriteTerminalString + "] and using [" + terminal + "]");
 
+        OperationSystem os = env.getOs();
         switch (os) {
 
             case WINDOWS:
@@ -50,7 +50,7 @@ public class CommandBuilder {
                         return executableCommand;
 
                     case CMDER:
-                        double windowsVersion = OperationSystem.parseWindowsVersion(env.getOsVersion());
+                        double windowsVersion = OperationSystem.parseOsVersion(env.getOsVersion());
 
                         if (windowsVersion < 10.0) {
                             // todo: prior to Windows 10 (Windows 8.1, 8, 7, Vista, XP, 2000)
@@ -72,13 +72,27 @@ public class CommandBuilder {
                 }
 
             case LINUX:
+                // todo: params support
+                String command1 = command;
+                String param = null;
+                if (command.contains(" ")) {
+                    String[] split = command.split(" ");
+                    command1 = split[0];
+                    param = split[1];
+                }
+
                 switch (terminal) {
                     case GNOME_TERMINAL:
-                        return new Command(command, "--working-directory", projectDirectory);
+                        return new Command(command1, param, "--working-directory", projectDirectory);
+                    case KONSOLE:
+                        return new Command(command1, param, "--workdir", projectDirectory);
                     case RXVT:
-                        return new Command(command, "-cd", projectDirectory);
+                        return new Command(command1, param, "-cd", projectDirectory);
 
                     default:
+                        if (param != null) {
+                            return new Command(command1, param, projectDirectory);
+                        }
                         return new Command(command);
                 }
 
