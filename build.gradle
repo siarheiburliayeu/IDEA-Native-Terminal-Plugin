@@ -35,6 +35,6 @@ patchPluginXml {
       <br><i>*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
   """
     changeNotes """
-      Added support for Konsole terminal.
+      [Windows 10] Cmder: fixed launch command for single instance mode.
   """
 }
