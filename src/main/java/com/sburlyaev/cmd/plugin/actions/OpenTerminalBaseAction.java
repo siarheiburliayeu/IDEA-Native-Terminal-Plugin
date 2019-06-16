@@ -1,9 +1,5 @@
 package com.sburlyaev.cmd.plugin.actions;
 
-import java.io.IOException;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
@@ -12,6 +8,9 @@ import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.settings.PluginSettings;
 import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 public abstract class OpenTerminalBaseAction extends AnAction {
 
@@ -20,16 +19,16 @@ public abstract class OpenTerminalBaseAction extends AnAction {
     @Deprecated
     protected static final String ENV_FAVORITE_TERMINAL = "FAVORITE_TERMINAL";
 
+    protected static final Environment env = Environment.getEnvironment();
+
     @NotNull
     protected abstract String getDirectory(AnActionEvent event, PluginSettingsState settings);
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
-        try {
-            // todo: move to static field?
-            Environment env = Environment.getEnvironment();
-            log.info(env.toString());
+        log.info(env.toString());
 
+        try {
             PluginSettingsState settings = PluginSettings.getInstance().getState();
             final String directory = getDirectory(event, settings);
             final String favoriteTerminalString = getFavoriteTerminal(settings);

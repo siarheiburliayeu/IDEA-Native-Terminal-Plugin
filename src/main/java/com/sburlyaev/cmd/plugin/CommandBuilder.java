@@ -15,6 +15,8 @@ public class CommandBuilder {
 
     private static final Logger log = Logger.getInstance(CommandBuilder.class);
 
+    private static final String PROJECT_DIR_PLACEHOLDER = "${project.dir}";
+
     public static Command createCommand(@NotNull Environment env,
                                         @NotNull String projectDirectory,
                                         @Nullable String favoriteTerminalString) throws FileNotFoundException {
@@ -23,6 +25,14 @@ public class CommandBuilder {
         String command = favoriteTerminalString != null
                 ? favoriteTerminalString
                 : env.getDefaultTerminal().getCommand();
+
+        if (isCustomCommand(command)) {
+            String[] customCommand = command
+                    .replace(PROJECT_DIR_PLACEHOLDER, projectDirectory)
+                    .split(" ");
+
+            return new Command(customCommand);
+        }
 
         Terminal terminal = Terminal.fromString(command);
         log.info("Favorite terminal is [" + favoriteTerminalString + "] and using [" + terminal + "]");
@@ -64,27 +74,15 @@ public class CommandBuilder {
                 }
 
             case LINUX:
-                // todo: params support
-                String command1 = command;
-                String param = null;
-                if (command.contains(" ")) {
-                    String[] split = command.split(" ");
-                    command1 = split[0];
-                    param = split[1];
-                }
-
                 switch (terminal) {
                     case GNOME_TERMINAL:
-                        return new Command(command1, param, "--working-directory", projectDirectory);
+                        return new Command(command, "--working-directory", projectDirectory);
                     case KONSOLE:
-                        return new Command(command1, param, "--workdir", projectDirectory);
+                        return new Command(command, "--workdir", projectDirectory);
                     case RXVT:
-                        return new Command(command1, param, "-cd", projectDirectory);
+                        return new Command(command, "-cd", projectDirectory);
 
                     default:
-                        if (param != null) {
-                            return new Command(command1, param, projectDirectory);
-                        }
                         return new Command(command);
                 }
 
@@ -99,6 +97,10 @@ public class CommandBuilder {
             default:
                 throw new RuntimeException("The environment is not supported: " + os);
         }
+    }
+
+    protected static boolean isCustomCommand(String command) {
+        return command.contains(PROJECT_DIR_PLACEHOLDER);
     }
 
     protected static void checkProjectDirectory(@NotNull String projectDirectory) throws FileNotFoundException {

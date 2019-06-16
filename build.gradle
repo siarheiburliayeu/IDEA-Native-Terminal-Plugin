@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.sburlyaev.terminal.plugin'
-version '0.3.6'
+version '0.4'
 
 sourceCompatibility = 1.8
 
@@ -33,8 +33,11 @@ patchPluginXml {
       <br>If you want to use another terminal instead - you can!
       <br>Just specify your favorite one in the <strong>IDE Settings / Preferences</strong>.
       <br><i>*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
+      <br>
+      <br>Since <strong>version 0.4</strong>, it is available to specify a custom command with \${project.dir} placeholder,
+      which will be replaced at runtime with the actual project directory.
   """
     changeNotes """
-      [Windows 10] Cmder: fixed launch command for single instance mode.
+      Introducing custom command support.
   """
 }
