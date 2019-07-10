@@ -1,8 +1,8 @@
 package com.sburlyaev.cmd.plugin.actions;
 
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.sburlyaev.cmd.plugin.CommandBuilder;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public abstract class OpenTerminalBaseAction extends AnAction {
+public abstract class OpenTerminalBaseAction extends DumbAwareAction {
 
     private static final Logger log = Logger.getInstance(OpenTerminalBaseAction.class);
 

@@ -1,34 +1,42 @@
 package com.sburlyaev.cmd.plugin.actions;
 
+import com.intellij.ide.actions.ShowFilePathAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class OpenSelectedDirectoryAction extends OpenTerminalBaseAction {
-
-    private static final String JAR_LIBRARY_EXTENSION = ".jar!";
 
     @NotNull
     @Override
     protected String getDirectory(AnActionEvent event, PluginSettingsState settings) {
-        VirtualFile file = event.getData(CommonDataKeys.VIRTUAL_FILE);
-        return getDir(file).getPath();
+        VirtualFile directory = getDirectory(event);
+        if (directory == null) {
+            return System.getProperty("user.home");
+        }
+        return directory.getPath();
     }
 
     @Override
     public void update(@NotNull AnActionEvent event) {
-        VirtualFile file = event.getData(CommonDataKeys.VIRTUAL_FILE);
-        Presentation presentation = event.getPresentation();
-        presentation.setVisible(file != null && getDir(file) != null);
+        Project project = getEventProject(event);
+        event.getPresentation().setEnabledAndVisible(project != null && getSelectedFile(event) != null);
     }
 
-    protected VirtualFile getDir(@NotNull VirtualFile file) {
-        if (file.getPath().contains(JAR_LIBRARY_EXTENSION)) {
-            return null;
-        }
+    @Nullable
+    private static VirtualFile getSelectedFile(@NotNull AnActionEvent event) {
+        return ShowFilePathAction.findLocalFile(event.getData(CommonDataKeys.VIRTUAL_FILE));
+    }
+
+    @Nullable
+    private VirtualFile getDirectory(@NotNull AnActionEvent event) {
+        VirtualFile file = getSelectedFile(event);
+        if (file == null) return null;
+
         return file.isDirectory() ? file : file.getParent();
     }
 }
