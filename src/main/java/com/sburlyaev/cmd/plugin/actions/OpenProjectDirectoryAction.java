@@ -1,39 +1,32 @@
 package com.sburlyaev.cmd.plugin.actions;
 
-import java.io.File;
-
-import org.jetbrains.annotations.NotNull;
-
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
+import org.jetbrains.annotations.NotNull;
+
+import static com.sburlyaev.cmd.plugin.actions.SetAsDefaultDirectoryAction.DEFAULT_DIRECTORY_PROPERTY_KEY;
 
 public class OpenProjectDirectoryAction extends OpenTerminalBaseAction {
 
     @NotNull
     @Override
-    protected String getDirectory(AnActionEvent event, PluginSettingsState settings) {
-        Project project = event.getProject();
+    protected String getDirectory(AnActionEvent event, PluginSettingsState settings) {  // todo: settings are not required anymore
+        Project project = getEventProject(event);
         if (project == null) {
             return System.getProperty("user.home");
         }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(project.getBasePath());
-        if (settings != null) {
-            // Introduce subdirectory support (v0.2)
-            String subDirectory = settings.getSubDirectory();
-            if (subDirectory != null && !subDirectory.isEmpty()) {
-                File file = new File(subDirectory);
-                if (file.exists()) {
-                    return subDirectory;  // Another directory support -longforus
-                }
-                if (!(subDirectory.startsWith("/") || subDirectory.startsWith("\\"))) {
-                    sb.append(File.separatorChar);
-                }
-                sb.append(subDirectory);
+        PropertiesComponent properties = PropertiesComponent.getInstance(project);
+        String defaultDirectory = properties.getValue(DEFAULT_DIRECTORY_PROPERTY_KEY);
+
+        if (defaultDirectory == null) {
+            defaultDirectory = project.getBasePath();
+            if (defaultDirectory == null) {
+                defaultDirectory = System.getProperty("user.home");
             }
         }
-        return sb.toString();
+        return defaultDirectory;
     }
 }
