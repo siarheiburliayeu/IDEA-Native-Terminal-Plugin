@@ -1,15 +1,21 @@
 package com.sburlyaev.cmd.plugin.actions;
 
 import com.intellij.ide.actions.ShowFilePathAction;
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class OpenSelectedDirectoryAction extends OpenTerminalBaseAction {
+public class SetAsDefaultDirectoryAction extends DumbAwareAction {
+
+    private static final Logger log = Logger.getInstance(SetAsDefaultDirectoryAction.class);
+
+    public static final String DEFAULT_DIRECTORY_PROPERTY_KEY = "com.sburlyaev.terminal.plugin.properties.directory";
 
     @Override
     public void update(@NotNull AnActionEvent event) {
@@ -17,14 +23,17 @@ public class OpenSelectedDirectoryAction extends OpenTerminalBaseAction {
         event.getPresentation().setEnabledAndVisible(project != null && getSelectedFile(event) != null);
     }
 
-    @NotNull
     @Override
-    protected String getDirectory(AnActionEvent event, PluginSettingsState settings) {
-        VirtualFile directory = getSelectedDirectory(event);
-        if (directory == null) {
-            return System.getProperty("user.home");
-        }
-        return directory.getPath();
+    public void actionPerformed(AnActionEvent e) {
+        Project project = getEventProject(e);
+        VirtualFile directory = getSelectedDirectory(e);
+        if (project == null || directory == null) return;
+
+        PropertiesComponent properties = PropertiesComponent.getInstance(project);
+        properties.setValue(DEFAULT_DIRECTORY_PROPERTY_KEY, directory.getPath());
+
+        log.info("'" + properties.getValue(DEFAULT_DIRECTORY_PROPERTY_KEY) +
+                "' is set as default directory for project: " + project.getName());
     }
 
     @Nullable
