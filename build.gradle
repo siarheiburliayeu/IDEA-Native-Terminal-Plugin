@@ -38,6 +38,7 @@ patchPluginXml {
       which will be replaced at runtime with the actual project directory.
   """
     changeNotes """
-      Introducing custom command support.
+      - Subdirectory settings option was moved to the context menu and now works on project level.
+      <br>- The plugin is now available while the indices are updating.
   """
 }
