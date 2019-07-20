@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.io.File;
 
 public class PluginSettingsConfigurable implements Configurable {
 
@@ -23,17 +22,14 @@ public class PluginSettingsConfigurable implements Configurable {
     private PluginSettings pluginSettings;
 
     private FileChooserDescriptor terminalChooserDescriptor;
-    private FileChooserDescriptor directoryChooserDescriptor;
     private final Project project;
     private VirtualFile selectedTerminal;
-    private VirtualFile selectedSubDirectory;
 
     private final String warningMessage = "The selected terminal currently is not supported and may not work properly";
 
     public PluginSettingsConfigurable() {
         // Set 'chooseFolders' depend on OS, because macOS application represents a directory.
         terminalChooserDescriptor = new FileChooserDescriptor(true, OS.isMacOSX(), false, false, false, false);
-        directoryChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
 
         Project[] openProjects = ProjectManager.getInstance().getOpenProjects();
         if (openProjects.length > 0) {
@@ -52,25 +48,6 @@ public class PluginSettingsConfigurable implements Configurable {
         if (!TextUtils.isEmpty(favoriteTerminal)) {
             selectedTerminal = VirtualFileManager.getInstance().findFileByUrl(getFileUrl(favoriteTerminal));
         }
-        String subDirectory = "";
-        if (pluginSettings.getState() != null) {
-            subDirectory = pluginSettings.getState().getSubDirectory();
-        }
-        if (!TextUtils.isEmpty(subDirectory)) {
-            File file = new File(subDirectory);
-            if (file.exists()) {
-                selectedSubDirectory = VirtualFileManager.getInstance().findFileByUrl(getFileUrl(subDirectory));
-            } else {
-                file = new File(project.getBasePath() + subDirectory);
-                if (file.exists()) {
-                    selectedSubDirectory = VirtualFileManager.getInstance().findFileByUrl(getFileUrl(file.getPath()));
-                }
-            }
-        }
-        if (selectedSubDirectory == null) {
-            // todo: project.getBaseDir() deprecated in 2018.3
-            selectedSubDirectory = project.getBaseDir();
-        }
 
         pluginSettingsForm.getTerminalFileChooserButton().addActionListener(e -> {
             VirtualFile[] chosenTerminals = new FileChooserDialogImpl(terminalChooserDescriptor, project)
@@ -86,22 +63,6 @@ public class PluginSettingsConfigurable implements Configurable {
                     }
                     selectedTerminal = file;
                     pluginSettingsForm.getFavoriteTerminalField().setText(canonicalPath);
-                }
-            }
-        });
-
-        pluginSettingsForm.getDirectoryFileChooserButton().addActionListener(e -> {
-            VirtualFile[] chosenDirectories = new FileChooserDialogImpl(directoryChooserDescriptor, project)
-                    .choose(project, selectedSubDirectory);
-
-            if (chosenDirectories.length > 0) {
-                selectedSubDirectory = chosenDirectories[0];
-                if (selectedSubDirectory != null) {
-                    String subDirCanonicalPath = selectedSubDirectory.getCanonicalPath();
-                    if (subDirCanonicalPath != null && project.getBasePath() != null && subDirCanonicalPath.startsWith(project.getBasePath())) {
-                        subDirCanonicalPath = subDirCanonicalPath.replace(project.getBasePath(), "");
-                    }
-                    pluginSettingsForm.getSubDirectoryField().setText(subDirCanonicalPath);
                 }
             }
         });

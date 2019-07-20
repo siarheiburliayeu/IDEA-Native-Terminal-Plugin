@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.1'
+    id 'org.jetbrains.intellij' version '0.4.9'
 }
 
 group 'com.sburlyaev.terminal.plugin'
-version '0.4.1'
+version '0.4.2'
 
 sourceCompatibility = 1.8
 
@@ -38,6 +38,7 @@ patchPluginXml {
       which will be replaced at runtime with the actual project directory.
   """
     changeNotes """
-      Introducing custom command support.
+      - Subdirectory settings option was moved to the context menu and now works on project level.
+      <br>- The plugin is now available while the indices are updating.
   """
 }

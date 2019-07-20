@@ -23,6 +23,7 @@
         <action id="com.sburlyaev.cmd.plugin.actions.OpenTerminal"
                 class="com.sburlyaev.cmd.plugin.actions.OpenProjectDirectoryAction"
                 text="Terminal"
+                description="Open the project directory in external terminal"
                 icon="Icons.TERMINAL_ICON">
             <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <add-to-group group-id="MainToolBar" anchor="last"/>
@@ -30,11 +31,19 @@
         <action id="com.sburlyaev.cmd.plugin.actions.OpenInTerminal"
                 class="com.sburlyaev.cmd.plugin.actions.OpenSelectedDirectoryAction"
                 text="Open in external Terminal"
+                description="Open current file location in external terminal"
                 icon="Icons.TERMINAL_ICON">
             <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="after"-->
                           <!--relative-to-action="ProjectViewPopupMenuRunGroup"/>-->
             <add-to-group group-id="RunContextPopupGroup" anchor="before"
                           relative-to-action="OpenInBrowserGroup"/>
+        </action>
+        <action id="com.sburlyaev.cmd.plugin.actions.SetAsDefaultDirectoryAction"
+                class="com.sburlyaev.cmd.plugin.actions.SetAsDefaultDirectoryAction"
+                text="Set as default directory for external terminal"
+                description="Set current directory location as the default path for external terminal">
+            <add-to-group group-id="RunContextPopupGroup" anchor="after"
+                          relative-to-action="com.sburlyaev.cmd.plugin.actions.OpenInTerminal"/>
         </action>
     </actions>
 </idea-plugin>
