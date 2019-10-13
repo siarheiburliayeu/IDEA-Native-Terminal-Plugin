@@ -65,6 +65,7 @@ public class CommandBuilder {
                     case GIT_BASH:
                         return new Command(command, "--cd=" + projectDirectory);
 
+                    case WSL:
                     case BASH:
                         return new Command("cmd", "/k", "start", "/d",
                                 projectDirectory.replace("/", "\\"), command);

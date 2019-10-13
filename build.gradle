@@ -32,13 +32,12 @@ patchPluginXml {
       <br>
       <br>If you want to use another terminal instead - you can!
       <br>Just specify your favorite one in the <strong>IDE Settings / Preferences</strong>.
-      <br><i>*PowerShell, ConEmu, Cmder, Bash (WSL), GitBash, RXVT, iTerm are also supported.</i>
+      <br><i>*PowerShell, ConEmu, Cmder, WSL (bash, wsl), GitBash, RXVT, iTerm are also supported.</i>
       <br>
       <br>Since <strong>version 0.4</strong>, it is available to specify a custom command with \${project.dir} placeholder,
       which will be replaced at runtime with the actual project directory.
   """
     changeNotes """
-      - Subdirectory settings option was moved to the context menu and now works on project level.
-      <br>- The plugin is now available while the indices are updating.
+      - Improved WSL support (wsl, wsl.exe).
   """
 }
