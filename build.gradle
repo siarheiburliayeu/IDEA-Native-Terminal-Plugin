@@ -38,6 +38,6 @@ patchPluginXml {
       which will be replaced at runtime with the actual project directory.
   """
     changeNotes """
-      - Improved WSL support (wsl, wsl.exe).
+      - Improved support for 'Windows Terminal' and other new terminals.
   """
 }

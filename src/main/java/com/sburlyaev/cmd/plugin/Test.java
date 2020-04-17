@@ -25,13 +25,11 @@ public class Test {
         System.out.println("/usr/bin/gnome-terminal: " + new File("/usr/bin/gnome-terminal").exists());
         System.out.println("/usr/bin/konsole: " + new File("/usr/bin/konsole").exists());
 
-        String command1 = "konsole";
-        String command2 = "--new-tab";
-        String command3 = "--workdir";
-        String command4 = System.getProperty("user.dir");
+        String dir = System.getProperty("user.dir");
 
-        Command command = new Command(command1, command2, command3, command4);
+        Command command = new Command("wt", "-d", dir);
         System.out.println(command);
+        System.out.println(dir);
         command.execute();
     }
 

@@ -22,13 +22,15 @@ public class Command {
         this.commands.addAll(Arrays.asList(commands));
     }
 
+    @Deprecated
     public void execute() throws IOException {
         new ProcessBuilder(commands)
                 .start();
     }
 
     public void execute(String path) throws IOException {
-        new ProcessBuilder(commands).directory(new File(path))
+        new ProcessBuilder(commands)
+                .directory(new File(path))
                 .start();
     }
 

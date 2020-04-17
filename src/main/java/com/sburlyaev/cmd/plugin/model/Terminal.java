@@ -5,6 +5,7 @@ import java.io.File;
 public enum Terminal {
     // Windows
     CMDER("cmder"),
+    WINDOWS_TERMINAL("wt"),
     COMMAND_PROMPT("cmd"),
     POWER_SHELL("powershell"),
     CON_EMU("conemu"),

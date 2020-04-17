@@ -36,6 +36,7 @@ public class CommandBuilder {
 
         Terminal terminal = Terminal.fromString(command);
         log.info("Favorite terminal is [" + favoriteTerminalString + "] and using [" + terminal + "]");
+        log.info("Project directory: " + projectDirectory);
 
         OperationSystem os = env.getOs();
         switch (os) {
@@ -48,6 +49,9 @@ public class CommandBuilder {
                     case POWER_SHELL:
                         return new Command("cmd", "/c", "start", command, "-NoExit", "-Command",
                                 "Set-Location", "'" + projectDirectory + "'");
+
+                    case WINDOWS_TERMINAL:
+                        return new Command(command, "-d", projectDirectory);
 
                     case CON_EMU:
                         String conEmuRunCommand = " -run ";
