@@ -35,7 +35,7 @@ public abstract class OpenTerminalBaseAction extends DumbAwareAction {
 
             Command command = CommandBuilder.createCommand(env, directory, favoriteTerminalString);
             log.info(command.getCommands().toString());
-            command.execute();
+            command.execute(directory);
 
         } catch (IOException e) {
             throw new RuntimeException("Failed to execute the command!", e);

@@ -1,5 +1,6 @@
 package com.sburlyaev.cmd.plugin.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,11 @@ public class Command {
 
     public void execute() throws IOException {
         new ProcessBuilder(commands)
+                .start();
+    }
+
+    public void execute(String path) throws IOException {
+        new ProcessBuilder(commands).directory(new File(path))
                 .start();
     }
 
