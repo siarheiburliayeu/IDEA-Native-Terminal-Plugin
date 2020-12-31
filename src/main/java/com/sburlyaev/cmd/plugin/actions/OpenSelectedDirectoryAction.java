@@ -1,6 +1,6 @@
 package com.sburlyaev.cmd.plugin.actions;
 
-import com.intellij.ide.actions.ShowFilePathAction;
+import com.intellij.ide.actions.RevealFileAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
@@ -14,7 +14,8 @@ public class OpenSelectedDirectoryAction extends OpenTerminalBaseAction {
     @Override
     public void update(@NotNull AnActionEvent event) {
         Project project = getEventProject(event);
-        event.getPresentation().setEnabledAndVisible(project != null && getSelectedFile(event) != null);
+        event.getPresentation().setEnabledAndVisible(
+                project != null && getSelectedFile(event) != null);
     }
 
     @NotNull
@@ -29,14 +30,15 @@ public class OpenSelectedDirectoryAction extends OpenTerminalBaseAction {
 
     @Nullable
     private static VirtualFile getSelectedFile(@NotNull AnActionEvent event) {
-        return ShowFilePathAction.findLocalFile(event.getData(CommonDataKeys.VIRTUAL_FILE));
+        return RevealFileAction.findLocalFile(event.getData(CommonDataKeys.VIRTUAL_FILE));
     }
 
     @Nullable
     private VirtualFile getSelectedDirectory(@NotNull AnActionEvent event) {
         VirtualFile file = getSelectedFile(event);
-        if (file == null) return null;
-
-        return file.isDirectory() ? file : file.getParent();
+        return file != null
+                ? file.isDirectory() ? file : file.getParent()
+                : null;
     }
+
 }

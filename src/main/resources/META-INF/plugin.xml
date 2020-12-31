@@ -8,14 +8,15 @@
     <change-notes/>
 
     <!-- http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="145"/>
+    <idea-version since-build="201"/>
 
     <!-- http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable id="com.sburlyaev.cmd.plugin.PluginSettings"
-                                 instance="com.sburlyaev.cmd.plugin.settings.PluginSettingsConfigurable"/>
+                                 instance="com.sburlyaev.cmd.plugin.settings.PluginSettingsConfigurable"
+                                 dynamic="true"/>
         <applicationService serviceImplementation="com.sburlyaev.cmd.plugin.settings.PluginSettings"/>
     </extensions>
 
@@ -30,7 +31,7 @@
         </action>
         <action id="com.sburlyaev.cmd.plugin.actions.OpenInTerminal"
                 class="com.sburlyaev.cmd.plugin.actions.OpenSelectedDirectoryAction"
-                text="Open in external Terminal"
+                text="Open in External Terminal"
                 description="Open current file location in external terminal"
                 icon="Icons.TERMINAL_ICON">
             <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="after"-->
@@ -40,7 +41,7 @@
         </action>
         <action id="com.sburlyaev.cmd.plugin.actions.SetAsDefaultDirectoryAction"
                 class="com.sburlyaev.cmd.plugin.actions.SetAsDefaultDirectoryAction"
-                text="Set as default directory for external terminal"
+                text="Set as Default Directory for External Terminal"
                 description="Set current directory location as the default path for external terminal">
             <add-to-group group-id="RunContextPopupGroup" anchor="after"
                           relative-to-action="com.sburlyaev.cmd.plugin.actions.OpenInTerminal"/>

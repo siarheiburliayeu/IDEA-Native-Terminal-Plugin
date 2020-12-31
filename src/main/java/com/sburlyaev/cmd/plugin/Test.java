@@ -30,7 +30,7 @@ public class Test {
         Command command = new Command("wt", "-d", dir);
         System.out.println(command);
         System.out.println(dir);
-        command.execute();
+        //command.execute();
     }
 
     private static double parseOsVersion(String windowsVersion) {

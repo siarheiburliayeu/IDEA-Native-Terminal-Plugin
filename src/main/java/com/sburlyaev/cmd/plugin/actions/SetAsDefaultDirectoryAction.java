@@ -1,6 +1,6 @@
 package com.sburlyaev.cmd.plugin.actions;
 
-import com.intellij.ide.actions.ShowFilePathAction;
+import com.intellij.ide.actions.RevealFileAction;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -24,10 +24,11 @@ public class SetAsDefaultDirectoryAction extends DumbAwareAction {
     }
 
     @Override
-    public void actionPerformed(AnActionEvent e) {
+    public void actionPerformed(@NotNull AnActionEvent e) {
         Project project = getEventProject(e);
         VirtualFile directory = getSelectedDirectory(e);
-        if (project == null || directory == null) return;
+        if (project == null || directory == null)
+            return;
 
         PropertiesComponent properties = PropertiesComponent.getInstance(project);
         properties.setValue(DEFAULT_DIRECTORY_PROPERTY_KEY, directory.getPath());
@@ -38,14 +39,15 @@ public class SetAsDefaultDirectoryAction extends DumbAwareAction {
 
     @Nullable
     private static VirtualFile getSelectedFile(@NotNull AnActionEvent event) {
-        return ShowFilePathAction.findLocalFile(event.getData(CommonDataKeys.VIRTUAL_FILE));
+        return RevealFileAction.findLocalFile(event.getData(CommonDataKeys.VIRTUAL_FILE));
     }
 
     @Nullable
     private VirtualFile getSelectedDirectory(@NotNull AnActionEvent event) {
         VirtualFile file = getSelectedFile(event);
-        if (file == null) return null;
-
-        return file.isDirectory() ? file : file.getParent();
+        return file != null
+                ? file.isDirectory() ? file : file.getParent()
+                : null;
     }
+
 }

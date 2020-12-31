@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.9'
+    id 'org.jetbrains.intellij' version '0.6.5'
 }
 
 group 'com.sburlyaev.terminal.plugin'
@@ -17,13 +17,13 @@ dependencies {
 }
 
 intellij {
-    version 'IC-2016.2'
+    version 'IC-2020.2'
     updateSinceUntilBuild false
 }
 
 patchPluginXml {
     pluginDescription """
-      adds a Terminal icon to the IDE toolbar and context menu to open project directories in your favorite terminal.
+      adds a Terminal icon to the IDE toolbar and context menu which opens project directories in your favorite terminal.
       <br>
       <br>By default, it uses OS native terminal:
       <br>Windows - Command Prompt (cmd)
