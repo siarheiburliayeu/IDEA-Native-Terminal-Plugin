@@ -17,6 +17,8 @@ public enum Terminal {
     GNOME_TERMINAL("gnome-terminal", "/usr/bin/gnome-terminal"),
     KONSOLE("konsole", "/usr/bin/konsole"),
     RXVT("rxvt"),
+    TERMINATOR("terminator"),
+    KITTY("kitty"),
 
     // macOS
     MAC_TERMINAL("Terminal"),

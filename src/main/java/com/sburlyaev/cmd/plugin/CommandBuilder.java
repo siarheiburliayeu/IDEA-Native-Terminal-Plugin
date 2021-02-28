@@ -83,10 +83,13 @@ public class CommandBuilder {
                     case GNOME_TERMINAL:
                         return new Command(command, "--working-directory", projectDirectory);
                     case KONSOLE:
-                        return new Command(command, "--workdir", projectDirectory);
+                        return new Command(command, "--new-tab", "--workdir", projectDirectory);
+                    case TERMINATOR:
+                        return new Command(command, "--new-tab", "--working-directory", projectDirectory);
+                    case KITTY:
+                        return new Command(command, "-1", "-d", projectDirectory);
                     case RXVT:
                         return new Command(command, "-cd", projectDirectory);
-
                     default:
                         return new Command(command);
                 }
