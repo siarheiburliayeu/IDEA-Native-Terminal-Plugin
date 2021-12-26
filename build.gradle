@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.6.5'
+    id 'org.jetbrains.intellij' version '0.7.3'
 }
 
 group 'com.sburlyaev.terminal.plugin'
@@ -13,11 +13,11 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
 
 intellij {
-    version 'IC-2020.2'
+    version 'IC-2021.3'
     updateSinceUntilBuild false
 }
 
