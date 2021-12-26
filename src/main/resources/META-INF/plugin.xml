@@ -26,8 +26,9 @@
                 text="Terminal"
                 description="Open the project directory in external terminal"
                 icon="Icons.TERMINAL_ICON">
-            <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <add-to-group group-id="MainToolBar" anchor="last"/>
+            <add-to-group group-id="NavBarToolBar" anchor="first"/>
+            <add-to-group group-id="RightToolbarSideGroup" anchor="first"/> <!-- Rider 2021.3 -->
         </action>
         <action id="com.sburlyaev.cmd.plugin.actions.OpenInTerminal"
                 class="com.sburlyaev.cmd.plugin.actions.OpenSelectedDirectoryAction"

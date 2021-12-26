@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
         storages = @Storage("nativeTerminalPlugin.xml"))
 public class PluginSettings implements PersistentStateComponent<PluginSettingsState> {
 
-    private PluginSettingsState PluginSettingsState;
+    private PluginSettingsState pluginSettingsState;
 
     public static PluginSettings getInstance() {
         return ServiceManager.getService(PluginSettings.class);
@@ -20,11 +20,11 @@ public class PluginSettings implements PersistentStateComponent<PluginSettingsSt
     @Nullable
     @Override
     public PluginSettingsState getState() {
-        return PluginSettingsState;
+        return pluginSettingsState;
     }
 
     @Override
     public void loadState(@NotNull PluginSettingsState state) {
-        PluginSettingsState = state;
+        pluginSettingsState = state;
     }
 }
