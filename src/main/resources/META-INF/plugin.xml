@@ -26,6 +26,7 @@
                 text="Terminal"
                 description="Open the project directory in external terminal"
                 icon="Icons.TERMINAL_ICON">
+            <keyboard-shortcut first-keystroke="ctrl t" keymap="$default"/>
             <add-to-group group-id="MainToolBar" anchor="last"/>
             <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <add-to-group group-id="RightToolbarSideGroup" anchor="first"/> <!-- Rider 2021.3 -->
