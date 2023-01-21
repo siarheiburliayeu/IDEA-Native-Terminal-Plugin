@@ -38,6 +38,6 @@ patchPluginXml {
       which will be replaced at runtime with the actual project directory.
   """
     changeNotes """
-      - Added Terminal button to 'Right Toolbar Side Group' (used as a default for Rider 2021.3+)
+      - Added a default hotkey for opening the terminal (can be changed in the IDE Settings)
   """
 }

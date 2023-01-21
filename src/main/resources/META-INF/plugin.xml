@@ -26,10 +26,13 @@
                 text="Terminal"
                 description="Open the project directory in external terminal"
                 icon="Icons.TERMINAL_ICON">
-            <keyboard-shortcut first-keystroke="ctrl t" keymap="$default"/>
             <add-to-group group-id="MainToolBar" anchor="last"/>
             <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <add-to-group group-id="RightToolbarSideGroup" anchor="first"/> <!-- Rider 2021.3 -->
+
+            <keyboard-shortcut first-keystroke="control T" keymap="$default"/>
+            <keyboard-shortcut first-keystroke="control shift T" keymap="Mac OS X" replace-all="true"/>
+            <keyboard-shortcut first-keystroke="control shift T" keymap="Mac OS X 10.5+" replace-all="true"/>
         </action>
         <action id="com.sburlyaev.cmd.plugin.actions.OpenInTerminal"
                 class="com.sburlyaev.cmd.plugin.actions.OpenSelectedDirectoryAction"
