@@ -1,12 +1,12 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.7.3'
+    id 'org.jetbrains.intellij' version '1.14.1'
 }
 
 group 'com.sburlyaev.terminal.plugin'
-version '0.4.7'
+version '0.5.1'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 17
 
 repositories {
     mavenCentral()
@@ -17,12 +17,12 @@ dependencies {
 }
 
 intellij {
-    version 'IC-2021.3'
-    updateSinceUntilBuild false
+    version = 'IC-2023.1'
+    updateSinceUntilBuild = false
 }
 
 patchPluginXml {
-    pluginDescription """
+    pluginDescription = """
       adds a Terminal icon to the IDE toolbar and context menu which opens project directories in your favorite terminal.
       <br>
       <br>By default, it uses OS native terminal:
@@ -37,7 +37,8 @@ patchPluginXml {
       <br>Since <strong>version 0.4</strong>, it is available to specify a custom command with \${project.dir} placeholder,
       which will be replaced at runtime with the actual project directory.
   """
-    changeNotes """
-      - Added a default hotkey for opening the terminal (can be changed in the IDE Settings)
+    changeNotes = """
+    <h3>0.5.1 (2023-06-13)</h3>
+    <li>Added support for Intellij New UI (2023.1+)</li>
   """
 }

@@ -8,7 +8,7 @@
     <change-notes/>
 
     <!-- http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="201"/>
+    <idea-version since-build="231"/>
 
     <!-- http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.lang</depends>
@@ -29,6 +29,7 @@
             <add-to-group group-id="MainToolBar" anchor="last"/>
             <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <add-to-group group-id="RightToolbarSideGroup" anchor="first"/> <!-- Rider 2021.3 -->
+            <add-to-group group-id="MainToolbarRight" anchor="first"/> <!-- New UI -->
 
             <keyboard-shortcut first-keystroke="control T" keymap="$default"/>
             <keyboard-shortcut first-keystroke="control shift T" keymap="Mac OS X" replace-all="true"/>
