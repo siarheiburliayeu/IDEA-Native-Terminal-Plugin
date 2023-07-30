@@ -16,6 +16,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable id="com.sburlyaev.cmd.plugin.PluginSettings"
                                  instance="com.sburlyaev.cmd.plugin.settings.PluginSettingsConfigurable"
+                                 displayName="Native Terminal Plugin"
                                  dynamic="true"/>
         <applicationService serviceImplementation="com.sburlyaev.cmd.plugin.settings.PluginSettings"/>
     </extensions>
