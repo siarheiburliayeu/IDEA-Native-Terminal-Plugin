@@ -38,6 +38,8 @@ patchPluginXml {
       which will be replaced at runtime with the actual project directory.
   """
     changeNotes = """
+    <h3>0.5.2 (2023-07-31)</h3>
+    <li>Fix 'PluginException: No display name is specified for configurable' in 2023.2+</li>
     <h3>0.5.1 (2023-06-13)</h3>
     <li>Added support for Intellij New UI (2023.1+)</li>
   """
