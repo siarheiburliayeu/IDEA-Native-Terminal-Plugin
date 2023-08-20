@@ -2,8 +2,8 @@
     <id>com.sburlyaev.terminal.plugin</id>
     <name>Native Terminal</name>
     <version/>
-    <vendor email="sburlyaev7@gmail.com"
-            url="https://github.com/sburlyaev/IDEA-Native-Terminal-Plugin">Siarhei Burliayeu</vendor>
+    <vendor email="siarhei@duck.com"
+            url="https://github.com/siarheiburliayeu/IDEA-Native-Terminal-Plugin">Siarhei Burliayeu</vendor>
     <description/>
     <change-notes/>
 

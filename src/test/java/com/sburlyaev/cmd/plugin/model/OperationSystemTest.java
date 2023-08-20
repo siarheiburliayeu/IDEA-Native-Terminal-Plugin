@@ -28,4 +28,5 @@ public class OperationSystemTest {
     public void testFromStringNotSupported() {
         OperationSystem.fromString("NotSupportedOS");
     }
+
 }
