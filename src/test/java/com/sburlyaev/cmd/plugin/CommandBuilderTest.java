@@ -139,6 +139,17 @@ public class CommandBuilderTest {
 
     @Test
     @Ignore
+    public void testCreateCommandForMacOsKitty() throws FileNotFoundException {
+        Environment env = new Environment(OperationSystem.MAC_OS, "13.3", "X");
+        String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
+        Command result = CommandBuilder.createCommand(env, projectBaseDir, "kitty");
+
+        String expected = MessageFormat.format("open ''{0}'' -a kitty", projectBaseDir);
+        assertEquals(expected, result.getCommands());
+    }
+
+    @Test
+    @Ignore
     public void testCheckProjectDirectory() throws FileNotFoundException {
         String dir = System.getProperty("user.dir");
         CommandBuilder.checkProjectDirectory(dir);

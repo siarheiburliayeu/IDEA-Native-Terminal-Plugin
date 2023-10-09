@@ -100,6 +100,7 @@ public class CommandBuilder {
                         return new Command("open", "-n", "-a", command, "--args", "--working-directory", projectDirectory);
                     case MAC_TERMINAL:
                     case I_TERM:
+                    case KITTY:
                     default:
                         return new Command("open", projectDirectory, "-a", command);
                 }

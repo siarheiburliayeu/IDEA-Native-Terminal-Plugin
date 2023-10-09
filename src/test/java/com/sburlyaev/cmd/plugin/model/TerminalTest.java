@@ -140,4 +140,10 @@ public class TerminalTest {
         assertEquals(Terminal.ALACRITTY, result);
     }
 
+    @Test
+    public void testFromStringIKitty() {
+        Terminal result = Terminal.fromString("kitty");
+        assertEquals(Terminal.KITTY, result);
+    }
+
 }
