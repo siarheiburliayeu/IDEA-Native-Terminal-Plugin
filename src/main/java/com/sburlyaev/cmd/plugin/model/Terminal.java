@@ -23,6 +23,7 @@ public enum Terminal {
     // macOS
     MAC_TERMINAL("Terminal"),
     I_TERM("iTerm"),
+    ALACRITTY("Alacritty"),
 
     GENERIC("");
 

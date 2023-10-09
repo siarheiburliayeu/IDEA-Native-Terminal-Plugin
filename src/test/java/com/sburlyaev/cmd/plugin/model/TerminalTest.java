@@ -134,4 +134,10 @@ public class TerminalTest {
         assertEquals(Terminal.I_TERM, result);
     }
 
+    @Test
+    public void testFromStringIAlacritty() {
+        Terminal result = Terminal.fromString("Alacritty");
+        assertEquals(Terminal.ALACRITTY, result);
+    }
+
 }

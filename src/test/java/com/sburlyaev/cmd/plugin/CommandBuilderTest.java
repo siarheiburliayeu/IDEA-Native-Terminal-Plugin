@@ -128,6 +128,17 @@ public class CommandBuilderTest {
 
     @Test
     @Ignore
+    public void testCreateCommandForMacOsAlacritty() throws FileNotFoundException {
+        Environment env = new Environment(OperationSystem.MAC_OS, "13.3", "X");
+        String projectBaseDir = "/user/home/IdeaProjects/IDEA-Native-Terminal-Plugin";
+        Command result = CommandBuilder.createCommand(env, projectBaseDir, "Alacritty");
+
+        String expected = MessageFormat.format("open -n -a Alacritty --args --working-directory {0}", projectBaseDir);
+        assertEquals(expected, result.getCommands());
+    }
+
+    @Test
+    @Ignore
     public void testCheckProjectDirectory() throws FileNotFoundException {
         String dir = System.getProperty("user.dir");
         CommandBuilder.checkProjectDirectory(dir);
