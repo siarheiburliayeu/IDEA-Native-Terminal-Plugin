@@ -146,4 +146,10 @@ public class TerminalTest {
         assertEquals(Terminal.KITTY, result);
     }
 
+    @Test
+    public void testFromStringIHyper() {
+        Terminal result = Terminal.fromString("Hyper");
+        assertEquals(Terminal.HYPER, result);
+    }
+
 }

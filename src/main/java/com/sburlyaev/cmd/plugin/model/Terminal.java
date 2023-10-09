@@ -24,6 +24,7 @@ public enum Terminal {
     MAC_TERMINAL("Terminal"),
     I_TERM("iTerm"),
     ALACRITTY("Alacritty"),
+    HYPER("Hyper"),
 
     GENERIC("");
 
