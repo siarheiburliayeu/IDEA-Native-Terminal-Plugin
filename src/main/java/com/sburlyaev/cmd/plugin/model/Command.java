@@ -2,7 +2,6 @@ package com.sburlyaev.cmd.plugin.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -14,34 +13,29 @@ public class Command {
 
     public Command(String... commands) {
         this.commands = Arrays.stream(commands)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList()); // ArrayList
     }
 
     public void add(String... commands) {
         this.commands.addAll(Arrays.asList(commands));
     }
 
-    @Deprecated
-    public void execute() throws IOException {
-        new ProcessBuilder(commands)
-                .start();
-    }
-
     public void execute(String path) throws IOException {
         new ProcessBuilder(commands)
-                .directory(new File(path))
-                .start();
+            .directory(new File(path))
+            .start();
     }
 
     public List<String> getCommands() {
-        return new ArrayList<>(commands);
+        return List.copyOf(commands);
     }
 
     @Override
     public String toString() {
         return "Command{" +
-                "commands=" + commands +
-                '}';
+            "commands=" + commands +
+            '}';
     }
+
 }

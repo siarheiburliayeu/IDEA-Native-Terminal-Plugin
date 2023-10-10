@@ -1,7 +1,6 @@
 package com.sburlyaev.cmd.plugin.model;
 
 import com.intellij.openapi.diagnostic.Logger;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,4 +46,5 @@ public enum OperationSystem {
         }
         return version;
     }
+
 }

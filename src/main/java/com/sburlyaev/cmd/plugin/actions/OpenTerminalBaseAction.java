@@ -8,9 +8,8 @@ import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.settings.PluginSettings;
 import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class OpenTerminalBaseAction extends DumbAwareAction {
 
@@ -43,7 +42,7 @@ public abstract class OpenTerminalBaseAction extends DumbAwareAction {
     }
 
     private String getFavoriteTerminal(PluginSettingsState settings) {
-        // to be compatible with old versions (prior to v0.2)
+        // for compatibility with old versions (prior to v0.2)
         final String envFavoriteTerminal = System.getenv(ENV_FAVORITE_TERMINAL);
 
         if (settings != null) {
@@ -54,4 +53,5 @@ public abstract class OpenTerminalBaseAction extends DumbAwareAction {
         }
         return envFavoriteTerminal;
     }
+
 }

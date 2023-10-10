@@ -2,17 +2,9 @@ package com.sburlyaev.cmd.plugin.model;
 
 import java.io.File;
 
-public class Environment {
-
-    private final OperationSystem os;
-    private final String osVersion;
-    private final String gui;
-
-    public Environment(OperationSystem os, String osVersion, String gui) {
-        this.os = os;
-        this.osVersion = osVersion;
-        this.gui = gui;
-    }
+public record Environment(OperationSystem os,
+                          String osVersion,
+                          String gui) {
 
     public static Environment getEnvironment() {
         // todo: use com.intellij.openapi.util.SystemInfo
@@ -27,14 +19,13 @@ public class Environment {
 
     public Terminal getDefaultTerminal() {
         switch (os) {
-
-            case WINDOWS:
+            case WINDOWS -> {
                 return Terminal.COMMAND_PROMPT;
-
-            case MAC_OS:
+            }
+            case MAC_OS -> {
                 return Terminal.MAC_TERMINAL;
-
-            case LINUX:
+            }
+            case LINUX -> {
                 if (gui != null && gui.toLowerCase().contains("gnome")) {
                     return Terminal.GNOME_TERMINAL;
                 }
@@ -43,29 +34,18 @@ public class Environment {
                 }
                 // todo: KDE?
                 return Terminal.KONSOLE;
-            default:
-                throw new IllegalArgumentException("os: " + os);
+            }
+            default -> throw new IllegalArgumentException("os: " + os);
         }
-    }
-
-    public OperationSystem getOs() {
-        return os;
-    }
-
-    public String getOsVersion() {
-        return osVersion;
-    }
-
-    public String getGui() {
-        return gui;
     }
 
     @Override
     public String toString() {
         return "Environment{" +
-                "os=" + os +
-                ", osVersion='" + osVersion + '\'' +
-                ", gui='" + gui + '\'' +
-                '}';
+            "os=" + os +
+            ", osVersion='" + osVersion + '\'' +
+            ", gui='" + gui + '\'' +
+            '}';
     }
+
 }

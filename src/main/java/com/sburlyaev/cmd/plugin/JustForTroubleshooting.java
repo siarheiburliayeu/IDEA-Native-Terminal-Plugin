@@ -1,13 +1,12 @@
 package com.sburlyaev.cmd.plugin;
 
 import com.sburlyaev.cmd.plugin.model.Command;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Test {
+public class JustForTroubleshooting {
 
     private static final Pattern OS_VERSION_PATTERN = Pattern.compile("^(\\d+\\.\\d+).*");
 
@@ -46,4 +45,5 @@ public class Test {
         }
         return version;
     }
+
 }

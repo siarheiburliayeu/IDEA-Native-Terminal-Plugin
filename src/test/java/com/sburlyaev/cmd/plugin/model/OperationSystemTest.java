@@ -1,32 +1,41 @@
 package com.sburlyaev.cmd.plugin.model;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-public class OperationSystemTest {
+class OperationSystemTest {
 
-    @Test
-    public void testFromStringWindows() {
-        OperationSystem result = OperationSystem.fromString("Windows 10");
+    @ParameterizedTest
+    @ValueSource(strings = {"Windows", "Windows 10", "Windows 11.0"})
+    void testFromStringWindows(String osName) {
+        OperationSystem result = OperationSystem.fromString(osName);
         assertEquals(OperationSystem.WINDOWS, result);
     }
 
-    @Test
-    public void testFromStringLinux() {
-        OperationSystem result = OperationSystem.fromString("Linux");
+    @ParameterizedTest
+    @ValueSource(strings = {"Linux", "Linux 6.5.6-42-generic"})
+    void testFromStringLinux(String osName) {
+        OperationSystem result = OperationSystem.fromString(osName);
         assertEquals(OperationSystem.LINUX, result);
     }
 
-    @Test
-    public void testFromStringMacOS() {
-        OperationSystem result = OperationSystem.fromString("MacOS");
+    @ParameterizedTest
+    @ValueSource(strings = {"MacOS", "Mac OS X", "Mac OS X 10.15.7"})
+    void testFromStringMacOS(String osName) {
+        OperationSystem result = OperationSystem.fromString(osName);
         assertEquals(OperationSystem.MAC_OS, result);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testFromStringNotSupported() {
-        OperationSystem.fromString("NotSupportedOS");
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"NotSupportedOS"})
+    void testFromStringNotSupported(String osName) {
+        assertThrows(RuntimeException.class,
+            () -> OperationSystem.fromString(osName));
     }
 
 }

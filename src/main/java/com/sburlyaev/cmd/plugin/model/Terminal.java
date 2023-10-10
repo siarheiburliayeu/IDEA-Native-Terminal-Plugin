@@ -53,7 +53,7 @@ public enum Terminal {
         return matchTerminal(getExecutable(command));
     }
 
-    protected static Terminal matchTerminal(String fileName) {
+    private static Terminal matchTerminal(String fileName) {
         for (Terminal terminal : Terminal.values()) {
             if (terminal != GENERIC  // skip GENERIC because `contains("")` returns `true` for any string
                     && containsIgnoreCase(fileName, terminal.command)) {
@@ -63,11 +63,12 @@ public enum Terminal {
         return GENERIC;
     }
 
-    protected static String getExecutable(String command) {
+    private static String getExecutable(String command) {
         return new File(command).getName();
     }
 
     private static boolean containsIgnoreCase(String s1, String s2) {
         return s1.toLowerCase().contains(s2.toLowerCase());
     }
+
 }

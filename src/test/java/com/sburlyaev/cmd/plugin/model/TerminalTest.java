@@ -1,154 +1,128 @@
 package com.sburlyaev.cmd.plugin.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import java.io.File;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-public class TerminalTest {
+class TerminalTest {
 
-    @Test
-    public void testFromStringCmd() {
-        Terminal result = Terminal.fromString("cmd");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "cmd",
+        "cmd.exe",
+        "CMD",
+    })
+    void testFromStringCmd(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.COMMAND_PROMPT, result);
     }
 
-    @Test
-    public void testFromStringCmdExe() {
-        Terminal result = Terminal.fromString("cmd.exe");
-        assertEquals(Terminal.COMMAND_PROMPT, result);
-    }
-
-    @Test
-    public void testFromStringCmdUpperCase() {
-        Terminal result = Terminal.fromString("CMD");
-        assertEquals(Terminal.COMMAND_PROMPT, result);
-    }
-
-    @Test
-    public void testFromStringPowerShellLowerCase() {
-        Terminal result = Terminal.fromString("powershell");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "powershell",
+        "powershell.exe",
+        "PowerShell",
+    })
+    void testFromStringPowerShell(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.POWER_SHELL, result);
     }
 
-    @Test
-    public void testFromStringPowerShellExe() {
-        Terminal result = Terminal.fromString("powershell.exe");
-        assertEquals(Terminal.POWER_SHELL, result);
-    }
-
-    @Test
-    public void testFromStringPowerShell() {
-        Terminal result = Terminal.fromString("PowerShell");
-        assertEquals(Terminal.POWER_SHELL, result);
-    }
-
-    @Test
-    public void testFromStringConEmuPath() {
-        Terminal result = Terminal.fromString("C:/Program Files/ConEmu/ConEmu64.exe");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "conemu",
+        "ConEmu64.exe",
+        "C:/Program Files/ConEmu/ConEmu64.exe",
+        "C:\\Program Files\\ConEmu\\ConEmu64.exe",
+    })
+    void testFromStringConEmu(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.CON_EMU, result);
     }
 
     @Test
-    public void testFromStringConEmuPath2() {
-        Terminal result = Terminal.fromString("C:\\Program Files\\ConEmu\\ConEmu64.exe");
+    void testFromStringConEmuWithCmdInPath() {
+        String command = String.join(File.separator, "C:", "cmds", "ConEmu", "ConEmu64.exe");
+        Terminal result = Terminal.fromString(String.join(File.separator, command));
         assertEquals(Terminal.CON_EMU, result);
     }
 
-    @Test
-    public void testFromStringConEmuPathWithCmd() {
-        Terminal result = Terminal.fromString("C:/cmds/ConEmu/ConEmu64.exe");
-        assertEquals(Terminal.CON_EMU, result);
-    }
-
-    @Test
-    @Ignore("Actual: COMMAND_PROMPT") // fixme
-    public void testFromStringConEmuPathWithCmd2() {
-        Terminal result = Terminal.fromString("C:\\cmds\\ConEmu\\ConEmu64.exe");
-        assertEquals(Terminal.CON_EMU, result);
-    }
-
-    @Test
-    public void testFromStringConEmu() {
-        Terminal result = Terminal.fromString("conemu");
-        assertEquals(Terminal.CON_EMU, result);
-    }
-
-    @Test
-    public void testFromStringConEmu64Exe() {
-        Terminal result = Terminal.fromString("ConEmu64.exe");
-        assertEquals(Terminal.CON_EMU, result);
-    }
-
-    @Test
-    public void testFromStringGitBash() {
-        Terminal result = Terminal.fromString("git-bash");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "git-bash",
+        "git-bash.exe",
+        "C:/Program Files/Git/git-bash.exe",
+        "C:\\Program Files\\Git\\git-bash.exe",
+    })
+    void testFromStringGitBash(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.GIT_BASH, result);
     }
 
-    @Test
-    public void testFromStringGitBashExe() {
-        Terminal result = Terminal.fromString("git-bash.exe");
-        assertEquals(Terminal.GIT_BASH, result);
-    }
-
-    @Test
-    public void testFromStringGitBashPath() {
-        Terminal result = Terminal.fromString("C:/Program Files/Git/git-bash.exe");
-        assertEquals(Terminal.GIT_BASH, result);
-    }
-
-    @Test
-    public void testFromStringGitBashPath2() {
-        Terminal result = Terminal.fromString("C:\\Program Files\\Git\\git-bash.exe");
-        assertEquals(Terminal.GIT_BASH, result);
-    }
-
-    @Test
-    public void testFromStringGnomeTerminal() {
-        Terminal result = Terminal.fromString("gnome-terminal");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "gnome-terminal",
+        "/usr/bin/gnome-terminal",
+        "dbus-launch gnome-terminal",
+    })
+    void testFromStringGnomeTerminal(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.GNOME_TERMINAL, result);
     }
 
-    @Test
-    public void testFromStringDBusLaunchGnomeTerminal() {
-        Terminal result = Terminal.fromString("dbus-launch gnome-terminal");
-        assertEquals(Terminal.GNOME_TERMINAL, result);
-    }
-
-    @Test
-    public void testFromStringMacTerminal() {
-        Terminal result = Terminal.fromString("Terminal");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "Terminal",
+        "Terminal.app",
+    })
+    void testFromStringMacTerminal(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.MAC_TERMINAL, result);
     }
 
-    @Test
-    public void testFromStringMacTerminalApp() {
-        Terminal result = Terminal.fromString("Terminal.app");
-        assertEquals(Terminal.MAC_TERMINAL, result);
-    }
-
-    @Test
-    public void testFromStringITerm() {
-        Terminal result = Terminal.fromString("iTerm");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "iterm",
+        "iTerm",
+        "iTerm.app",
+    })
+    void testFromStringITerm(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.I_TERM, result);
     }
 
-    @Test
-    public void testFromStringIAlacritty() {
-        Terminal result = Terminal.fromString("Alacritty");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "alacritty",
+        "Alacritty",
+        "Alacritty.app",
+    })
+    void testFromStringAlacritty(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.ALACRITTY, result);
     }
 
-    @Test
-    public void testFromStringIKitty() {
-        Terminal result = Terminal.fromString("kitty");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "kitty",
+        "kitty.sh",
+    })
+    void testFromStringKitty(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.KITTY, result);
     }
 
-    @Test
-    public void testFromStringIHyper() {
-        Terminal result = Terminal.fromString("Hyper");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "hyper",
+        "Hyper",
+        "Hyper.app",
+    })
+    void testFromStringHyper(String command) {
+        Terminal result = Terminal.fromString(command);
         assertEquals(Terminal.HYPER, result);
     }
 
