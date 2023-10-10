@@ -32,7 +32,7 @@ patchPluginXml {
       <br>
       <br>If you want to use another terminal instead - you can!
       <br>Just specify your favorite one in the <strong>IDE Settings / Preferences</strong>.
-      <br><i>*PowerShell, ConEmu, Cmder, WSL, GitBash, RXVT, iTerm, kitty, Terminator are also supported.</i>
+      <br><i>*PowerShell, ConEmu, Cmder, WSL, GitBash, RXVT, iTerm, kitty, Terminator, Alacritty, Hyper are also supported.</i>
       <br>
       <br>Since <strong>version 0.4</strong>, it is available to specify a custom command with \${project.dir} placeholder,
       which will be replaced at runtime with the actual project directory.

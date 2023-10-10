@@ -134,4 +134,22 @@ public class TerminalTest {
         assertEquals(Terminal.I_TERM, result);
     }
 
+    @Test
+    public void testFromStringIAlacritty() {
+        Terminal result = Terminal.fromString("Alacritty");
+        assertEquals(Terminal.ALACRITTY, result);
+    }
+
+    @Test
+    public void testFromStringIKitty() {
+        Terminal result = Terminal.fromString("kitty");
+        assertEquals(Terminal.KITTY, result);
+    }
+
+    @Test
+    public void testFromStringIHyper() {
+        Terminal result = Terminal.fromString("Hyper");
+        assertEquals(Terminal.HYPER, result);
+    }
+
 }
