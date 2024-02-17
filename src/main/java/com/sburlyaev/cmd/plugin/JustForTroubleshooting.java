@@ -1,8 +1,8 @@
 package com.sburlyaev.cmd.plugin;
 
 import com.sburlyaev.cmd.plugin.model.Command;
+
 import java.io.File;
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,7 +10,7 @@ public class JustForTroubleshooting {
 
     private static final Pattern OS_VERSION_PATTERN = Pattern.compile("^(\\d+\\.\\d+).*");
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String osName = System.getProperty("os.name");
         String osVersion = System.getProperty("os.version");
         String gui = System.getProperty("sun.desktop");
