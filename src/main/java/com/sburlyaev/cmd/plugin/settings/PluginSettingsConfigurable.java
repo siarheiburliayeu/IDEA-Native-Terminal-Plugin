@@ -18,10 +18,10 @@ import javax.swing.*;
 
 public class PluginSettingsConfigurable implements Configurable {
 
-    private PluginSettingsForm pluginSettingsForm;
-    private PluginSettings pluginSettings;
+    private final PluginSettingsForm pluginSettingsForm;
+    private final PluginSettings pluginSettings;
 
-    private FileChooserDescriptor terminalChooserDescriptor;
+    private final FileChooserDescriptor terminalChooserDescriptor;
     private final Project project;
     private VirtualFile selectedTerminal;
 
@@ -104,9 +104,5 @@ public class PluginSettingsConfigurable implements Configurable {
         if (pluginSettings.getState() != null) {
             pluginSettingsForm.setSettingsState(pluginSettings.getState());
         }
-    }
-
-    @Override
-    public void disposeUIResources() {
     }
 }

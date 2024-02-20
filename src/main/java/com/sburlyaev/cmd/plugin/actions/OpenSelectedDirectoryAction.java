@@ -1,6 +1,7 @@
 package com.sburlyaev.cmd.plugin.actions;
 
 import com.intellij.ide.actions.RevealFileAction;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
@@ -41,4 +42,8 @@ public class OpenSelectedDirectoryAction extends OpenTerminalBaseAction {
                 : null;
     }
 
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.EDT;
+    }
 }

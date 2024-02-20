@@ -93,6 +93,7 @@ public class CommandBuilder {
             }
 
             case MAC_OS -> {
+                //noinspection SwitchStatementWithTooFewBranches
                 return switch (terminal) {
                     case ALACRITTY ->
                         new Command("open", "-n", "-a", command, "--args", "--working-directory", projectDirectory);
