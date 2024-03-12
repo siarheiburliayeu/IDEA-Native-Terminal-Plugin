@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.sburlyaev.terminal.plugin'
-version '0.6.1'
+version '0.7.0'
 
 sourceCompatibility = 17
 
@@ -38,6 +38,7 @@ patchPluginXml {
       which will be replaced at runtime with the actual project directory.
   """
     changeNotes = """
-    <li>Add support for Alacritty terminal emulator</li>
+    <li>Add support for PowerShell 7 (pwsh)</li>
+    <li>Fix ActionUpdateThread warnings</li>
   """
 }

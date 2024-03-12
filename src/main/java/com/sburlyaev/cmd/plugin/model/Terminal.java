@@ -8,6 +8,7 @@ public enum Terminal {
     WINDOWS_TERMINAL("wt"),
     COMMAND_PROMPT("cmd"),
     POWER_SHELL("powershell"),
+    POWER_SHELL_7("pwsh"),
     CON_EMU("conemu"),
     GIT_BASH("git-bash"),
     BASH("bash"),
