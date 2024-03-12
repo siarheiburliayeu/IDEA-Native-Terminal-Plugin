@@ -1,6 +1,7 @@
 package com.sburlyaev.cmd.plugin;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.sburlyaev.cmd.plugin.exception.UnsupportedEnvironmentException;
 import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.model.OperationSystem;
@@ -49,7 +50,7 @@ public class CommandBuilder {
                     case COMMAND_PROMPT -> {
                         return new Command("cmd", "/c", "start", command, "/K", "cd", "/d", projectDirectory);
                     }
-                    case POWER_SHELL -> {
+                    case POWER_SHELL, POWER_SHELL_7 -> {
                         return new Command("cmd", "/c", "start", command, "-NoExit", "-Command",
                             "Set-Location", "'" + projectDirectory + "'");
                     }
@@ -101,7 +102,7 @@ public class CommandBuilder {
                 };
             }
 
-            default -> throw new RuntimeException("The environment is not supported: " + os);
+            default -> throw new UnsupportedEnvironmentException("The environment is not supported: " + os);
         }
     }
 
