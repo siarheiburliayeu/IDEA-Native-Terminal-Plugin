@@ -39,6 +39,6 @@ patchPluginXml {
   """
     changeNotes = """
     <li>Add support for PowerShell 7 (pwsh)</li>
-    <li>Fix ActionUpdateThread warnings/li>
+    <li>Fix ActionUpdateThread warnings</li>
   """
 }
