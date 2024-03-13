@@ -1,5 +1,6 @@
 package com.sburlyaev.cmd.plugin.actions;
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.DumbAwareAction;
@@ -8,8 +9,9 @@ import com.sburlyaev.cmd.plugin.model.Command;
 import com.sburlyaev.cmd.plugin.model.Environment;
 import com.sburlyaev.cmd.plugin.settings.PluginSettings;
 import com.sburlyaev.cmd.plugin.settings.PluginSettingsState;
-import java.io.IOException;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 public abstract class OpenTerminalBaseAction extends DumbAwareAction {
 
@@ -54,4 +56,8 @@ public abstract class OpenTerminalBaseAction extends DumbAwareAction {
         return envFavoriteTerminal;
     }
 
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT;
+    }
 }
