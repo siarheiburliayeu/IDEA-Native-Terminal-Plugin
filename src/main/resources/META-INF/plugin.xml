@@ -24,7 +24,7 @@
     <actions>
         <action id="com.sburlyaev.cmd.plugin.actions.OpenTerminal"
                 class="com.sburlyaev.cmd.plugin.actions.OpenProjectDirectoryAction"
-                text="Terminal"
+                text="External Terminal"
                 description="Open the project directory in external terminal"
                 icon="Icons.TERMINAL_ICON">
             <add-to-group group-id="MainToolBar" anchor="last"/>

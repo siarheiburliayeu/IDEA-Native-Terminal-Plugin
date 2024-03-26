@@ -1,13 +1,13 @@
 package icons;
 
-import javax.swing.*;
-
 import com.intellij.openapi.util.IconLoader;
+import javax.swing.Icon;
 
 /*
- * https://www.jetbrains.org/intellij/sdk/docs/reference_guide/work_with_icons_and_images.html
+ * https://plugins.jetbrains.com/docs/intellij/icons.html
  */
 public interface Icons {
+
     /**
      * Icon: Terminal
      * From: <a href="https://jetbrains.design/intellij/resources/icons_list/">Terminal Icon</a>
