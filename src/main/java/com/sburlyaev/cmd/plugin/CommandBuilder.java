@@ -89,6 +89,8 @@ public class CommandBuilder {
                     case TERMINATOR -> new Command(command, "--new-tab", "--working-directory", projectDirectory);
                     case KITTY -> new Command(command, "-1", "-d", projectDirectory);
                     case RXVT -> new Command(command, "-cd", projectDirectory);
+                    case GHOSTTY_LINUX -> new Command(command, "--working-directory='" + projectDirectory + "'");
+
                     default -> new Command(command);
                 };
             }
@@ -98,6 +100,7 @@ public class CommandBuilder {
                 return switch (terminal) {
                     case ALACRITTY ->
                         new Command("open", "-n", "-a", command, "--args", "--working-directory", projectDirectory);
+
                     default -> new Command("open", projectDirectory, "-a", command);
                 };
             }
