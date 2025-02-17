@@ -4,29 +4,32 @@ import java.io.File;
 
 public enum Terminal {
     // Windows
+    BASH("bash"),
     CMDER("cmder"),
-    WINDOWS_TERMINAL("wt"),
     COMMAND_PROMPT("cmd"),
-    POWER_SHELL("powershell"),
-    POWER_SHELL_7("pwsh"),
     CON_EMU("conemu"),
     GIT_BASH("git-bash"),
-    BASH("bash"),
+    POWER_SHELL("powershell"),
+    POWER_SHELL_7("pwsh"),
+    WINDOWS_TERMINAL("wt"),
     WSL("wsl"),
 
     // Linux
+    GHOSTTY_LINUX("ghostty", "/usr/bin/ghostty"),
     GNOME_TERMINAL("gnome-terminal", "/usr/bin/gnome-terminal"),
+    KITTY("kitty"),
     KONSOLE("konsole", "/usr/bin/konsole"),
     RXVT("rxvt"),
     TERMINATOR("terminator"),
-    KITTY("kitty"),
 
     // macOS
-    MAC_TERMINAL("Terminal"),
-    I_TERM("iTerm"),
     ALACRITTY("Alacritty"),
+    GHOSTTY_MAC("Ghostty", "/usr/local/bin/Ghostty"),
     HYPER("Hyper"),
+    I_TERM("iTerm"),
+    MAC_TERMINAL("Terminal"),
 
+    // Generic
     GENERIC("");
 
     private final String command;

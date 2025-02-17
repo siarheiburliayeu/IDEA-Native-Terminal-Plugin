@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.14.2'
+    id 'org.jetbrains.intellij' version '1.17.4'
 }
 
 group 'com.sburlyaev.terminal.plugin'
@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.9.3'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.11.4'
 }
 
 intellij {
@@ -32,12 +32,12 @@ patchPluginXml {
       <br>
       <br>If you want to use another terminal instead - you can!
       <br>Just specify your favorite one in the <strong>IDE Settings / Preferences</strong>.
-      <br><i>*PowerShell, ConEmu, Cmder, WSL, GitBash, RXVT, iTerm, kitty, Terminator, Alacritty, Hyper are also supported.</i>
+      <br><i>*Alacritty, Cmder, ConEmu, Ghostty, GitBash, Hyper, iTerm, kitty, PowerShell, RXVT, Terminator, WSL are also supported.</i>
       <br>
       <br>Since <strong>version 0.4</strong>, it is available to specify a custom command with \${project.dir} placeholder,
       which will be replaced at runtime with the actual project directory.
   """
     changeNotes = """
-    <li>Update plugin icon</li>
+    <li>Adds support for Ghostty</li>
   """
 }
